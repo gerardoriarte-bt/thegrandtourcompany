@@ -19,12 +19,13 @@
 <meta name="twitter:image" content="https://thegrandtourcompany.com/og.png">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <script>
-/* Auto-hospedaje de React/ReactDOM/Babel: evita la dependencia de unpkg.com en runtime.
+/* Auto-hospedaje de React y ReactDOM: evita la dependencia de unpkg.com en runtime.
+   Babel no se mapea a proposito: solo lo carga el sistema x-import para modulos JSX,
+   que este sitio no usa. Si alguna vez se usara, cae al CDN como antes.
    support.js consulta window.__resources[url] antes de recurrir al CDN. */
 window.__resources = Object.assign({}, window.__resources, {
   "https://unpkg.com/react@18.3.1/umd/react.production.min.js": "/vendor/react.production.min.js",
-  "https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js": "/vendor/react-dom.production.min.js",
-  "https://unpkg.com/@babel/standalone@7.29.0/babel.min.js": "/vendor/babel.min.js"
+  "https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js": "/vendor/react-dom.production.min.js"
 });
 </script>
 <script src="./support.js"></script>

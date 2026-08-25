@@ -25,8 +25,11 @@ que las URLs limpias se resuelven con `rewrites` en `vercel.json`.
 
 ## Dependencias de runtime
 
-React 18.3.1, ReactDOM y Babel Standalone 7.29.0 están auto-hospedados en
+React 18.3.1 y ReactDOM están auto-hospedados en
 `vendor/`. Los hashes SHA-384 coinciden con los SRI que `support.js` espera.
+Babel Standalone no se auto-hospeda a propósito: solo lo carga el sistema
+`x-import` para módulos JSX, que este sitio no usa en ninguna página. Si algún
+día se usara, cae al CDN igual que antes.
 El override se inyecta en el `<head>` de cada página mediante
 `window.__resources`, el mecanismo que el propio runtime consulta antes de
 recurrir al CDN. El sitio ya no depende de `unpkg.com` en runtime.
