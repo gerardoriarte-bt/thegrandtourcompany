@@ -103,7 +103,8 @@ a:hover{color:#EDE9DF}
  [data-traj]{grid-template-columns:1fr 1fr!important}
 }
 @media (max-width:560px){
- [data-brand]{max-width:62vw}
+ [data-brand]{max-width:62vw;gap:10px!important}
+ [data-brand] img{height:36px!important}
  [data-desc]{white-space:normal;line-height:1.35}
  [data-logogrid]{grid-template-columns:1fr!important}
  [data-doors]{grid-template-columns:1fr!important}
@@ -115,9 +116,9 @@ a:hover{color:#EDE9DF}
 
 <header style="position:fixed;top:0;left:0;right:0;z-index:20;height:64px;background:rgba(13,14,12,0.92);border-bottom:1px solid rgba(237,233,223,0.12)">
   <div style="max-width:1440px;margin:0 auto;height:100%;padding:0 clamp(24px,5.5vw,80px);display:flex;align-items:center;justify-content:space-between;gap:40px">
-    <a data-brand href="#top" style="display:block;color:#EDE9DF;flex:0 0 auto">
-      <span style="display:block;font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.08em">THE GRAND TOUR COMPANY</span>
-      <span data-desc style="display:block;margin-top:3px;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.06em;color:rgba(237,233,223,0.5)">Marketing infrastructure for tourism economies.</span>
+    <a data-brand href="#top" style="display:flex;align-items:center;gap:14px;color:#EDE9DF;flex:0 0 auto">
+      <img src="/brand/tgtc-wordmark.png" alt="The Grand Tour Company" width="59" height="48" style="display:block;height:48px;width:auto">
+      <span data-desc style="display:block;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.06em;color:rgba(237,233,223,0.5)">Marketing infrastructure for tourism economies.</span>
     </a>
     <nav data-navcenter aria-label="Layers" style="display:flex;gap:32px;align-items:center">
       <sc-for list="{{ nav }}" as="n" hint-placeholder-count="5">
@@ -135,7 +136,7 @@ a:hover{color:#EDE9DF}
 <sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}">
   <div data-fade style="position:fixed;inset:0;z-index:30;background:#0D0E0C;padding:20px clamp(24px,5.5vw,80px) 40px;display:flex;flex-direction:column;color:#EDE9DF;font-family:Inter,sans-serif;overflow-y:auto">
     <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:24px;height:44px">
-      <span style="font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.08em">THE GRAND TOUR COMPANY</span>
+      <img src="/brand/tgtc-wordmark.png" alt="The Grand Tour Company" width="44" height="36" style="display:block;height:36px;width:auto">
       <button type="button" onClick="{{ toggleMenu }}" style="background:transparent;border:0;color:#EDE9DF;font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.06em;cursor:pointer;padding:0">Close</button>
     </div>
     <div style="margin-top:32px;border-top:1px solid rgba(237,233,223,0.12)">
@@ -450,6 +451,9 @@ a:hover{color:#EDE9DF}
     <p style="margin:0;font-family:'Instrument Serif',serif;font-weight:400;font-size:clamp(30px,3.6vw,52px);line-height:1.08;letter-spacing:-0.02em;max-width:26em">Marketing infrastructure for tourism economies.</p>
   </div>
   <div style="max-width:1440px;margin:0 auto;width:100%;padding:0 clamp(24px,5.5vw,80px)">
+    <img src="/brand/tgtc-wordmark.png" alt="The Grand Tour Company"
+         width="220" height="180"
+         style="display:block;height:clamp(96px,11vw,148px);width:auto;margin:clamp(56px,7vw,96px) 0 clamp(40px,5vw,64px)">
     <nav aria-label="Sitemap" data-sitemap style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:48px;border-top:1px solid rgba(237,233,223,0.12);padding-top:32px;font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.06em">
       <sc-for list="{{ sitemap }}" as="col" hint-placeholder-count="3">
         <div>
