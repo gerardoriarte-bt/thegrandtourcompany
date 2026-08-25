@@ -8,8 +8,10 @@ The Grand Tour Company marketing site. It is **not** a conventional web project:
 `package.json`, no build step, no test suite, and no framework. The pages are Claude Design
 artboards (`.dc.html`) rendered in the browser by a generated runtime (`support.js`).
 
-Deployed on Vercel at https://thegrandtourcompany.vercel.app, auto-deploying on every push to
-`main` (a push goes live in roughly 30 seconds).
+Deployed on Vercel at https://grandtour.company, auto-deploying on every push to `main` (a push
+goes live in roughly 30 seconds). The apex is the primary domain: `www` 307s to it, and the
+`thegrandtourcompany.vercel.app` alias 308s to it via a host-conditioned redirect in
+`vercel.json` — that rule must stay first in the list so a request takes a single hop.
 
 ## Running locally
 
@@ -92,11 +94,8 @@ headquarters declared in the footer. Reordering the array changes the drawing.
 
 ## Pending before the site is genuinely public
 
-- **Domain.** The site declares itself at `https://grandtour.company` in the `canonical`, `og:url`
-  and `og:image` tags of all seven pages, plus `robots.txt` and `sitemap.xml`. That domain is not
-  yet attached to the Vercel project and its DNS is not pointed, so those tags currently reference a
-  host that does not resolve. Until both are done the site is still reachable only at
-  `thegrandtourcompany.vercel.app`, and search engines will get contradictory signals.
+The domain is live and every canonical points at it. What is left:
+
 - **Dispatch form.** `api/dispatch.js` needs `RESEND_API_KEY`, `DISPATCH_TO` and `DISPATCH_FROM` in
   the Vercel project settings. Without them it returns 503 and the button shows `Failed — retry`,
   by design — it never confirms a submission that did not happen.

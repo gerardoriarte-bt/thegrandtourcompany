@@ -38,19 +38,20 @@ Las tipografías siguen viniendo de Google Fonts.
 
 ## Antes de publicar
 
-1. **Apuntar el dominio.** El sitio se declara en `https://grandtour.company`
-   (`canonical`, `og:url`, `og:image` de las 7 páginas, `robots.txt` y
-   `sitemap.xml`). Falta darlo de alta en el proyecto de Vercel y apuntar el DNS;
-   hasta entonces esas etiquetas señalan a un dominio que aún no responde.
+El sitio está publicado en **https://grandtour.company**. El apex es el dominio
+principal: `www` redirige a él y el alias `thegrandtourcompany.vercel.app`
+también, mediante un redirect condicionado por host en `vercel.json`.
 
-   Si el dominio cambiara:
+Si el dominio cambiara:
 
-   ```sh
-   grep -rl 'grandtour.company' . --include='*.dc.html' --include='*.xml' --include='*.txt' \
-     | xargs sed -i '' 's|https://grandtour.company|https://NUEVO-DOMINIO|g'
-   ```
+```sh
+grep -rl 'grandtour.company' . --include='*.dc.html' --include='*.xml' --include='*.txt' \
+  | xargs sed -i '' 's|https://grandtour.company|https://NUEVO-DOMINIO|g'
+```
 
-2. **Configurar el formulario de Dispatch.** En Vercel → Settings → Environment
+Queda pendiente:
+
+1. **Configurar el formulario de Dispatch.** En Vercel → Settings → Environment
    Variables:
 
    | Variable         | Valor                                            |

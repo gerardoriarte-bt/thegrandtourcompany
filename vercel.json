@@ -3,6 +3,17 @@
   "trailingSlash": false,
   "redirects": [
     {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "thegrandtourcompany.vercel.app"
+        }
+      ],
+      "destination": "https://grandtour.company/:path*",
+      "permanent": true
+    },
+    {
       "source": "/TGTC%20Website.dc.html",
       "destination": "/",
       "permanent": true
