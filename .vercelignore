@@ -6,3 +6,6 @@ uploads/
 
 # Metadatos del canvas
 .thumbnail
+
+# Servidor de desarrollo local, no forma parte del sitio
+dev-server.mjs

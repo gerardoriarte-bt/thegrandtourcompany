@@ -61,6 +61,24 @@ Las tipografías siguen viniendo de Google Fonts.
 
 ## Desarrollo local
 
-`vercel dev` aplica los rewrites y levanta la función de `api/`.
-Un `python3 -m http.server` sirve los archivos pero **no** resuelve `/` ni las
-URLs limpias — hay que pedir `TGTC Website.dc.html` directamente.
+```sh
+node dev-server.mjs          # http://localhost:3000
+PORT=4000 node dev-server.mjs
+```
+
+`dev-server.mjs` lee `vercel.json` y aplica los mismos redirects, rewrites y
+cabeceras, y ejecuta la función de `api/`. Sin dependencias y sin necesidad de
+cuenta de Vercel. Queda fuera del despliegue vía `.vercelignore`.
+
+`vercel dev` también sirve y es la implementación de referencia, pero exige
+iniciar sesión en Vercel.
+
+Un `python3 -m http.server` **no** vale: sirve los archivos pero no resuelve `/`
+ni las URLs limpias, que solo existen como rewrites de `vercel.json`.
+
+Para probar el formulario de punta a punta:
+
+```sh
+RESEND_API_KEY=re_xxx DISPATCH_TO=tu@correo.com DISPATCH_FROM=dispatch@tudominio \
+  node dev-server.mjs
+```

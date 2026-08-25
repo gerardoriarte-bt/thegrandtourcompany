@@ -13,14 +13,27 @@ Deployed on Vercel at https://thegrandtourcompany.vercel.app, auto-deploying on 
 
 ## Running locally
 
-`vercel dev` is the only faithful way to run this — it applies the `vercel.json` rewrites and
-executes the `api/` function. It requires a Vercel login.
+```sh
+node dev-server.mjs          # http://localhost:3000
+PORT=4000 node dev-server.mjs
+```
 
-A plain static server (`python3 -m http.server`) will serve the files but **will not** resolve `/`
-or any clean URL, because those exist only as `vercel.json` rewrites. Under a plain server you must
-request `TGTC Website.dc.html` directly.
+`dev-server.mjs` reads `vercel.json` and applies the same redirects, rewrites and headers, and
+executes the `api/` function with a minimal `req`/`res` shim (the handler is re-required per
+request, so edits take effect on reload). No dependencies and no Vercel login. It is excluded from
+deployment via `.vercelignore`.
 
-To exercise the dispatch endpoint end to end, pass the env vars listed under *Pending* below.
+`vercel dev` also works and is the reference implementation, but requires a Vercel login.
+
+Do **not** reach for a plain static server (`python3 -m http.server`): it serves the files but
+cannot resolve `/` or any clean URL, since those exist only as `vercel.json` rewrites.
+
+To exercise the dispatch endpoint end to end, pass the env vars listed under *Pending* below:
+
+```sh
+RESEND_API_KEY=re_xxx DISPATCH_TO=you@example.com DISPATCH_FROM=dispatch@yourdomain \
+  node dev-server.mjs
+```
 
 ## The dc runtime model
 
