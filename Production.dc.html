@@ -3,6 +3,30 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Production — The Grand Tour Company</title>
+<meta name="description" content="Layer 04. Production at scale means a continuous narrative system that accumulates cultural weight over years, not a burst of content per budget cycle.">
+<link rel="canonical" href="https://thegrandtourcompany.com/production">
+<meta name="theme-color" content="#0D0E0C">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="The Grand Tour Company">
+<meta property="og:title" content="Production — The Grand Tour Company">
+<meta property="og:description" content="Layer 04. Production at scale means a continuous narrative system that accumulates cultural weight over years, not a burst of content per budget cycle.">
+<meta property="og:url" content="https://thegrandtourcompany.com/production">
+<meta property="og:image" content="https://thegrandtourcompany.com/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Production — The Grand Tour Company">
+<meta name="twitter:description" content="Layer 04. Production at scale means a continuous narrative system that accumulates cultural weight over years, not a burst of content per budget cycle.">
+<meta name="twitter:image" content="https://thegrandtourcompany.com/og.png">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<script>
+/* Auto-hospedaje de React/ReactDOM/Babel: evita la dependencia de unpkg.com en runtime.
+   support.js consulta window.__resources[url] antes de recurrir al CDN. */
+window.__resources = Object.assign({}, window.__resources, {
+  "https://unpkg.com/react@18.3.1/umd/react.production.min.js": "/vendor/react.production.min.js",
+  "https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js": "/vendor/react-dom.production.min.js",
+  "https://unpkg.com/@babel/standalone@7.29.0/babel.min.js": "/vendor/babel.min.js"
+});
+</script>
 <script src="./support.js"></script>
 </head>
 <body>
@@ -74,7 +98,7 @@ a:hover{color:#EDE9DF}
 
 <header style="position:fixed;top:0;left:0;right:0;z-index:20;height:64px;background:rgba(13,14,12,0.92);border-bottom:1px solid rgba(237,233,223,0.12)">
   <div style="max-width:1440px;margin:0 auto;height:100%;padding:0 clamp(24px,5.5vw,80px);display:flex;align-items:center;justify-content:space-between;gap:40px">
-    <a data-brand href="TGTC Website.dc.html" style="display:block;color:#EDE9DF;flex:0 0 auto">
+    <a data-brand href="/" style="display:block;color:#EDE9DF;flex:0 0 auto">
       <span style="display:block;font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.08em">THE GRAND TOUR COMPANY</span>
       <span data-desc style="display:block;margin-top:3px;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.06em;color:rgba(237,233,223,0.5)">Marketing infrastructure for tourism economies.</span>
     </a>
@@ -84,8 +108,8 @@ a:hover{color:#EDE9DF}
       </sc-for>
     </nav>
     <div data-navutil style="display:flex;gap:24px;align-items:center;font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.06em;flex:0 0 auto">
-      <a href="Index.dc.html" style="color:#5E79E0">Index</a>
-      <a href="TGTC Website.dc.html#dispatch" style="color:rgba(237,233,223,0.8)">Contact</a>
+      <a href="/grand-tour-index" style="color:#5E79E0">Index</a>
+      <a href="/#dispatch" style="color:rgba(237,233,223,0.8)">Contact</a>
     </div>
     <button data-menubtn type="button" onClick="{{ toggleMenu }}" style="background:transparent;border:0;color:#EDE9DF;font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.06em;cursor:pointer;padding:0">Menu</button>
   </div>
@@ -104,8 +128,8 @@ a:hover{color:#EDE9DF}
           <span style="font-size:20px;line-height:1.3">{{ n.name }}</span>
         </a>
       </sc-for>
-      <a href="Index.dc.html" onClick="{{ toggleMenu }}" style="display:block;padding:20px 0;border-bottom:1px solid rgba(237,233,223,0.12);font-family:'IBM Plex Mono',monospace;font-size:13px;letter-spacing:0.06em;color:#5E79E0">Index</a>
-      <a href="TGTC Website.dc.html#dispatch" onClick="{{ toggleMenu }}" style="display:block;padding:20px 0;border-bottom:1px solid rgba(237,233,223,0.12);font-family:'IBM Plex Mono',monospace;font-size:13px;letter-spacing:0.06em;color:rgba(237,233,223,0.8)">Contact</a>
+      <a href="/grand-tour-index" onClick="{{ toggleMenu }}" style="display:block;padding:20px 0;border-bottom:1px solid rgba(237,233,223,0.12);font-family:'IBM Plex Mono',monospace;font-size:13px;letter-spacing:0.06em;color:#5E79E0">Index</a>
+      <a href="/#dispatch" onClick="{{ toggleMenu }}" style="display:block;padding:20px 0;border-bottom:1px solid rgba(237,233,223,0.12);font-family:'IBM Plex Mono',monospace;font-size:13px;letter-spacing:0.06em;color:rgba(237,233,223,0.8)">Contact</a>
     </div>
   </div>
 </sc-if>
@@ -120,7 +144,7 @@ a:hover{color:#EDE9DF}
 
 <div style="border-bottom:1px solid rgba(237,233,223,0.12)">
   <div style="max-width:1440px;margin:0 auto;padding:14px clamp(24px,5.5vw,80px);font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.06em;color:rgba(237,233,223,0.55)">
-    <a href="TGTC Website.dc.html" style="color:rgba(237,233,223,0.7)">Home</a> / Layer 04 — Production
+    <a href="/" style="color:rgba(237,233,223,0.7)">Home</a> / Layer 04 — Production
   </div>
 </div>
 
@@ -177,7 +201,7 @@ a:hover{color:#EDE9DF}
       <div>
         <h2 style="margin:0;font-family:'Instrument Serif',serif;font-weight:400;font-size:clamp(30px,3.6vw,50px);line-height:1.06;letter-spacing:-0.02em;max-width:22em">Creator density counts what nobody was paid to publish.</h2>
         <p style="margin:24px 0 0;font-size:17px;line-height:1.65;color:rgba(13,14,12,0.7);max-width:52ch">This layer is diagnosed by ledger, not by showreel. Creator density is one quarter of the desire score, counted from organic geolocated volume and log-normalised so a single viral month cannot carry a year.</p>
-        <p style="margin:24px 0 0;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.06em"><a href="Index.dc.html">Open the Grand Tour Index →</a></p>
+        <p style="margin:24px 0 0;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.06em"><a href="/grand-tour-index">Open the Grand Tour Index →</a></p>
       </div>
       <div style="border-top:1px solid rgba(13,14,12,0.28);padding-top:24px">
         <div style="display:flex;justify-content:space-between;gap:16px;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.06em;color:rgba(13,14,12,0.62);font-variant-numeric:tabular-nums">
@@ -249,14 +273,14 @@ a:hover{color:#EDE9DF}
 </section>
 
 <nav data-prevnext aria-label="Adjacent layers" style="max-width:1440px;margin:0 auto;padding:0 clamp(24px,5.5vw,80px);grid-template-columns:1fr 1fr;border-top:1px solid rgba(237,233,223,0.12)">
-  <a href="Desire.dc.html" style="padding:24px 24px 24px 0;font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.06em;color:#EDE9DF">← 03 Desire</a>
-  <a href="Growth.dc.html" style="padding:24px 0;text-align:right;border-left:1px solid rgba(237,233,223,0.12);font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.06em;color:#EDE9DF">05 Growth →</a>
+  <a href="/desire" style="padding:24px 24px 24px 0;font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.06em;color:#EDE9DF">← 03 Desire</a>
+  <a href="/growth" style="padding:24px 0;text-align:right;border-left:1px solid rgba(237,233,223,0.12);font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.06em;color:#EDE9DF">05 Growth →</a>
 </nav>
 
 <!-- 08 CONTACT -->
 <section style="padding:clamp(64px,7vw,96px) 0 64px;border-top:1px solid rgba(237,233,223,0.12)">
   <div style="max-width:1440px;margin:0 auto;padding:0 clamp(24px,5.5vw,80px);display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.06em;color:rgba(237,233,223,0.6)">
-    <span>Production mandates are scoped directly with the institution. <a href="TGTC Website.dc.html#public">Request a diagnostic →</a></span>
+    <span>Production mandates are scoped directly with the institution. <a href="/#public">Request a diagnostic →</a></span>
     <span style="color:rgba(237,233,223,0.55);font-variant-numeric:tabular-nums">Rome · 41.9028° N, 12.4964° E</span>
   </div>
 </section>
@@ -358,7 +382,7 @@ class Component extends DCLogic {
   renderVals() {
     const on = this.state.arg;
     const layerNames = ['Intelligence', 'Governance', 'Desire', 'Production', 'Growth'];
-    const hrefs = ['Intelligence.dc.html', 'Governance.dc.html', 'Desire.dc.html', 'Production.dc.html', 'Growth.dc.html'];
+    const hrefs = ['/intelligence', '/governance', '/desire', '/production', '/growth'];
     const inputs = [
       ['Organic geolocated posts', '184,300'], ['Distinct creators', '9,412'],
       ['Audience in source markets', '61.4M'], ['Log-normalised index', '64.7']
@@ -404,9 +428,9 @@ class Component extends DCLogic {
         { name: 'Ecosystem', dur: '12–36 months', scope: 'Creator and partner capacity transferred so output survives the mandate.' }
       ],
       links: [
-        { name: 'Layer 03 — Desire', rel: 'Sets the claim this layer is producing.', href: 'Desire.dc.html' },
-        { name: 'Layer 05 — Growth', rel: 'Converts published attention into arrivals.', href: 'Growth.dc.html' },
-        { name: 'Layer 01 — Intelligence', rel: 'Measures whether the output moved consideration.', href: 'Intelligence.dc.html' }
+        { name: 'Layer 03 — Desire', rel: 'Sets the claim this layer is producing.', href: '/desire' },
+        { name: 'Layer 05 — Growth', rel: 'Converts published attention into arrivals.', href: '/growth' },
+        { name: 'Layer 01 — Intelligence', rel: 'Measures whether the output moved consideration.', href: '/intelligence' }
       ]
     };
   }

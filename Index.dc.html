@@ -3,6 +3,30 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Grand Tour Index — The Grand Tour Company</title>
+<meta name="description" content="The Grand Tour Index measures the distance between the desire a country generates and the arrivals it converts, after controlling for proximity, air capacity and price level.">
+<link rel="canonical" href="https://thegrandtourcompany.com/grand-tour-index">
+<meta name="theme-color" content="#0D0E0C">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="The Grand Tour Company">
+<meta property="og:title" content="The Grand Tour Index — The Grand Tour Company">
+<meta property="og:description" content="The Grand Tour Index measures the distance between the desire a country generates and the arrivals it converts, after controlling for proximity, air capacity and price level.">
+<meta property="og:url" content="https://thegrandtourcompany.com/grand-tour-index">
+<meta property="og:image" content="https://thegrandtourcompany.com/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="The Grand Tour Index — The Grand Tour Company">
+<meta name="twitter:description" content="The Grand Tour Index measures the distance between the desire a country generates and the arrivals it converts, after controlling for proximity, air capacity and price level.">
+<meta name="twitter:image" content="https://thegrandtourcompany.com/og.png">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<script>
+/* Auto-hospedaje de React/ReactDOM/Babel: evita la dependencia de unpkg.com en runtime.
+   support.js consulta window.__resources[url] antes de recurrir al CDN. */
+window.__resources = Object.assign({}, window.__resources, {
+  "https://unpkg.com/react@18.3.1/umd/react.production.min.js": "/vendor/react.production.min.js",
+  "https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js": "/vendor/react-dom.production.min.js",
+  "https://unpkg.com/@babel/standalone@7.29.0/babel.min.js": "/vendor/babel.min.js"
+});
+</script>
 <script src="./support.js"></script>
 </head>
 <body>
@@ -80,7 +104,7 @@ a:hover{color:#EDE9DF}
 
 <header style="position:fixed;top:0;left:0;right:0;z-index:20;height:64px;background:rgba(13,14,12,0.92);border-bottom:1px solid rgba(237,233,223,0.12)">
   <div style="max-width:1440px;margin:0 auto;height:100%;padding:0 clamp(24px,5.5vw,80px);display:flex;align-items:center;justify-content:space-between;gap:40px">
-    <a data-brand href="TGTC Website.dc.html" style="display:block;color:#EDE9DF;flex:0 0 auto">
+    <a data-brand href="/" style="display:block;color:#EDE9DF;flex:0 0 auto">
       <span style="display:block;font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.08em">THE GRAND TOUR COMPANY</span>
       <span data-desc style="display:block;margin-top:3px;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.06em;color:rgba(237,233,223,0.5)">Marketing infrastructure for tourism economies.</span>
     </a>
@@ -91,7 +115,7 @@ a:hover{color:#EDE9DF}
     </nav>
     <div data-navutil style="display:flex;gap:24px;align-items:center;font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.06em;flex:0 0 auto">
       <a data-navlink data-navactive="on" href="#top" style="position:relative;color:#5E79E0">Index</a>
-      <a href="TGTC Website.dc.html#dispatch" style="color:rgba(237,233,223,0.8)">Contact</a>
+      <a href="/#dispatch" style="color:rgba(237,233,223,0.8)">Contact</a>
     </div>
     <button data-menubtn type="button" onClick="{{ toggleMenu }}" style="background:transparent;border:0;color:#EDE9DF;font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.06em;cursor:pointer;padding:0">Menu</button>
   </div>
@@ -111,7 +135,7 @@ a:hover{color:#EDE9DF}
         </a>
       </sc-for>
       <a href="#top" onClick="{{ toggleMenu }}" style="display:block;padding:20px 0;border-bottom:1px solid rgba(237,233,223,0.12);font-family:'IBM Plex Mono',monospace;font-size:13px;letter-spacing:0.06em;color:#5E79E0">Index</a>
-      <a href="TGTC Website.dc.html#dispatch" onClick="{{ toggleMenu }}" style="display:block;padding:20px 0;border-bottom:1px solid rgba(237,233,223,0.12);font-family:'IBM Plex Mono',monospace;font-size:13px;letter-spacing:0.06em;color:rgba(237,233,223,0.8)">Contact</a>
+      <a href="/#dispatch" onClick="{{ toggleMenu }}" style="display:block;padding:20px 0;border-bottom:1px solid rgba(237,233,223,0.12);font-family:'IBM Plex Mono',monospace;font-size:13px;letter-spacing:0.06em;color:rgba(237,233,223,0.8)">Contact</a>
     </div>
   </div>
 </sc-if>
@@ -120,7 +144,7 @@ a:hover{color:#EDE9DF}
 
 <div style="border-bottom:1px solid rgba(237,233,223,0.12)">
   <div style="max-width:1440px;margin:0 auto;padding:14px clamp(24px,5.5vw,80px);font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.06em;color:rgba(237,233,223,0.55)">
-    <a href="TGTC Website.dc.html" style="color:rgba(237,233,223,0.7)">Home</a> / The Grand Tour Index
+    <a href="/" style="color:rgba(237,233,223,0.7)">Home</a> / The Grand Tour Index
   </div>
 </div>
 
@@ -353,7 +377,7 @@ a:hover{color:#EDE9DF}
         <span style="color:rgba(237,233,223,0.6)">Model specification, inputs, weighting and revision history</span>
         <span style="color:#5E79E0">→</span>
       </a>
-      <a href="TGTC Website.dc.html#public" style="display:grid;grid-template-columns:minmax(0,4fr) minmax(0,6fr) auto;gap:32px;align-items:baseline;padding:22px 0;border-bottom:1px solid rgba(237,233,223,0.12);font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.06em;color:#EDE9DF">
+      <a href="/#public" style="display:grid;grid-template-columns:minmax(0,4fr) minmax(0,6fr) auto;gap:32px;align-items:baseline;padding:22px 0;border-bottom:1px solid rgba(237,233,223,0.12);font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.06em;color:#EDE9DF">
         <span>Contact</span>
         <span style="color:rgba(237,233,223,0.6)">Readings for a named country are scoped directly with the institution</span>
         <span style="color:#5E79E0">→</span>
@@ -614,11 +638,11 @@ class Component extends DCLogic {
     const levels = { 1: 'low', 2: 'moderate', 3: 'high friction', 4: 'severe' };
     const compNames = [['Search intent', '35%'], ['Creator density', '25%'], ['Sentiment quality', '15%'], ['Cultural magnetism', '25%']];
     const mandate = {
-      leak: ['Layer 02 — Governance', 'Governance.dc.html'],
-      under: ['Layer 05 — Growth', 'Growth.dc.html'],
-      exp: ['Layer 03 — Desire', 'Desire.dc.html'],
-      above: ['Layer 04 — Production', 'Production.dc.html'],
-      surplus: ['Layer 01 — Intelligence', 'Intelligence.dc.html']
+      leak: ['Layer 02 — Governance', '/governance'],
+      under: ['Layer 05 — Growth', '/growth'],
+      exp: ['Layer 03 — Desire', '/desire'],
+      above: ['Layer 04 — Production', '/production'],
+      surplus: ['Layer 01 — Intelligence', '/intelligence']
     };
     const cmp = this.state.cmp.map(i => rows[i]);
     const cmpVal = (fn, color) => cmp.map(x => ({ v: fn(x), color: color ? color(x) : 'rgba(13,14,12,0.85)' }));
@@ -628,7 +652,7 @@ class Component extends DCLogic {
       mapLayer: this.state.map,
       nav: ['Intelligence', 'Governance', 'Desire', 'Production', 'Growth'].map((name, i) => ({
         num: '0' + (i + 1), name,
-        href: [ 'Intelligence.dc.html', 'Governance.dc.html', 'Desire.dc.html', 'Production.dc.html', 'Growth.dc.html'][i]
+        href: [ '/intelligence', '/governance', '/desire', '/production', '/growth'][i]
       })),
       menuOpen: !!this.state.menu,
       toggleMenu: () => this.setState({ menu: !this.state.menu }),
