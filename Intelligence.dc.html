@@ -89,7 +89,7 @@ a:hover{color:#EDE9DF}
 @media (max-width:560px){
  [data-brand]{max-width:62vw;gap:10px!important}
  [data-brand] img{height:20px!important}
- [data-desc]{white-space:normal;line-height:1.35}
+ [data-subdesc]{display:none}
  [data-logogrid]{grid-template-columns:1fr!important}
  [data-doors]{grid-template-columns:1fr!important}
 }
@@ -100,9 +100,8 @@ a:hover{color:#EDE9DF}
 
 <header style="position:fixed;top:0;left:0;right:0;z-index:20;height:64px;background:rgba(13,14,12,0.92);border-bottom:1px solid rgba(237,233,223,0.12)">
   <div style="max-width:1440px;margin:0 auto;height:100%;padding:0 clamp(24px,5.5vw,80px);display:flex;align-items:center;justify-content:space-between;gap:40px">
-    <a data-brand href="/" style="display:flex;align-items:center;gap:14px;color:#EDE9DF;flex:0 0 auto">
+    <a data-brand href="/" style="display:block;color:#EDE9DF;flex:0 0 auto">
       <img src="/brand/tgtc-lockup.png" alt="The Grand Tour Company" width="249" height="26" style="display:block;height:26px;width:auto">
-      <span data-desc style="display:block;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.06em;color:rgba(237,233,223,0.5)">Marketing infrastructure for tourism economies.</span>
     </a>
     <nav data-navcenter aria-label="Layers" style="display:flex;gap:32px;align-items:center">
       <sc-for list="{{ nav }}" as="n" hint-placeholder-count="5">
@@ -145,8 +144,9 @@ a:hover{color:#EDE9DF}
 <div data-mainpad style="position:relative;z-index:1;padding-top:64px;color:#EDE9DF;font-family:Inter,system-ui,sans-serif;font-weight:400;overflow-x:clip">
 
 <div style="border-bottom:1px solid rgba(237,233,223,0.12)">
-  <div style="max-width:1440px;margin:0 auto;padding:14px clamp(24px,5.5vw,80px);font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.06em;color:rgba(237,233,223,0.55)">
-    <a href="/" style="color:rgba(237,233,223,0.7)">Home</a> / Layer 01 — Intelligence
+  <div style="max-width:1440px;margin:0 auto;padding:14px clamp(24px,5.5vw,80px);font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.06em;color:rgba(237,233,223,0.55);display:flex;justify-content:space-between;align-items:baseline;gap:24px;flex-wrap:wrap">
+    <span><a href="/" style="color:rgba(237,233,223,0.7)">Home</a> / Layer 01 — Intelligence</span>
+    <span data-subdesc style="color:rgba(237,233,223,0.45)">Marketing infrastructure for tourism economies.</span>
   </div>
 </div>
 
