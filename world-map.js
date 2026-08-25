@@ -71,7 +71,7 @@ export function buildWorldMap(React, opts) {
       kids.push(E('line', { key: 'gv' + lon, x1: X(lon), y1: 0, x2: X(lon), y2: 500, stroke: ink + '0.24)', strokeWidth: 0.5 }));
     }
     for (let lat = 80; lat >= -60; lat -= 20) {
-      kids.push(E('line', { key: 'gh' + lat, x1: 0, y1: Y(lat), x2: 1000, y2: Y(lat), stroke: ink + (lat === 0 ? '0.4)' : '0.24)'), strokeWidth: lat === 0 ? 0.8 : 0.5 }));
+      kids.push(E('line', { key: 'gh' + lat, x1: 0, y1: Y(lat), x2: 1000, y2: Y(lat), stroke: ink + '0.24)', strokeWidth: 0.5 }));
     }
   }
 

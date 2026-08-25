@@ -649,7 +649,7 @@ class Component extends DCLogic {
       }
       for (let lat = 80; lat >= -60; lat -= 20) {
         const y = ((84 - lat) / 144) * 500;
-        kids.push(E('line', { key: 'gh' + lat, x1: 0, y1: y, x2: 1000, y2: y, stroke: ink + (lat === 0 ? '0.45)' : '0.28)'), strokeWidth: lat === 0 ? 0.8 : 0.5 }));
+        kids.push(E('line', { key: 'gh' + lat, x1: 0, y1: y, x2: 1000, y2: y, stroke: ink + '0.28)', strokeWidth: 0.5 }));
       }
     }
 
