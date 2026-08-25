@@ -38,13 +38,16 @@ Las tipografías siguen viniendo de Google Fonts.
 
 ## Antes de publicar
 
-1. **Fijar el dominio.** El placeholder `https://thegrandtourcompany.com` aparece
-   en los `<link rel="canonical">`, `og:url`, `og:image` de las 7 páginas y en
-   `robots.txt` / `sitemap.xml`. Sustituirlo por el dominio real:
+1. **Apuntar el dominio.** El sitio se declara en `https://grandtour.company`
+   (`canonical`, `og:url`, `og:image` de las 7 páginas, `robots.txt` y
+   `sitemap.xml`). Falta darlo de alta en el proyecto de Vercel y apuntar el DNS;
+   hasta entonces esas etiquetas señalan a un dominio que aún no responde.
+
+   Si el dominio cambiara:
 
    ```sh
-   grep -rl 'thegrandtourcompany.com' . --include='*.dc.html' --include='*.xml' --include='*.txt' \
-     | xargs sed -i '' 's|https://thegrandtourcompany.com|https://TU-DOMINIO|g'
+   grep -rl 'grandtour.company' . --include='*.dc.html' --include='*.xml' --include='*.txt' \
+     | xargs sed -i '' 's|https://grandtour.company|https://NUEVO-DOMINIO|g'
    ```
 
 2. **Configurar el formulario de Dispatch.** En Vercel → Settings → Environment

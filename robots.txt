@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://thegrandtourcompany.com/sitemap.xml
+Sitemap: https://grandtour.company/sitemap.xml

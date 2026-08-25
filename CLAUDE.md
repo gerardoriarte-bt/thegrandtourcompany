@@ -92,9 +92,11 @@ headquarters declared in the footer. Reordering the array changes the drawing.
 
 ## Pending before the site is genuinely public
 
-- **Domain.** `https://thegrandtourcompany.com` is a placeholder in the `canonical`, `og:url` and
-  `og:image` tags of all seven pages, plus `robots.txt` and `sitemap.xml`. It does not match the
-  live URL. `README.md` has the one-liner to replace it.
+- **Domain.** The site declares itself at `https://grandtour.company` in the `canonical`, `og:url`
+  and `og:image` tags of all seven pages, plus `robots.txt` and `sitemap.xml`. That domain is not
+  yet attached to the Vercel project and its DNS is not pointed, so those tags currently reference a
+  host that does not resolve. Until both are done the site is still reachable only at
+  `thegrandtourcompany.vercel.app`, and search engines will get contradictory signals.
 - **Dispatch form.** `api/dispatch.js` needs `RESEND_API_KEY`, `DISPATCH_TO` and `DISPATCH_FROM` in
   the Vercel project settings. Without them it returns 503 and the button shows `Failed — retry`,
   by design — it never confirms a submission that did not happen.

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://thegrandtourcompany.com/</loc><priority>1.0</priority></url>
-  <url><loc>https://thegrandtourcompany.com/grand-tour-index</loc><priority>0.9</priority></url>
-  <url><loc>https://thegrandtourcompany.com/intelligence</loc><priority>0.8</priority></url>
-  <url><loc>https://thegrandtourcompany.com/governance</loc><priority>0.8</priority></url>
-  <url><loc>https://thegrandtourcompany.com/desire</loc><priority>0.8</priority></url>
-  <url><loc>https://thegrandtourcompany.com/production</loc><priority>0.8</priority></url>
-  <url><loc>https://thegrandtourcompany.com/growth</loc><priority>0.8</priority></url>
+  <url><loc>https://grandtour.company/</loc><priority>1.0</priority></url>
+  <url><loc>https://grandtour.company/grand-tour-index</loc><priority>0.9</priority></url>
+  <url><loc>https://grandtour.company/intelligence</loc><priority>0.8</priority></url>
+  <url><loc>https://grandtour.company/governance</loc><priority>0.8</priority></url>
+  <url><loc>https://grandtour.company/desire</loc><priority>0.8</priority></url>
+  <url><loc>https://grandtour.company/production</loc><priority>0.8</priority></url>
+  <url><loc>https://grandtour.company/growth</loc><priority>0.8</priority></url>
 </urlset>
