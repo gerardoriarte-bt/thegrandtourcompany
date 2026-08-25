@@ -647,10 +647,6 @@ class Component extends DCLogic {
         const x = ((lon + 180) / 360) * 1000;
         kids.push(E('line', { key: 'gv' + lon, x1: x, y1: 0, x2: x, y2: 500, stroke: ink + '0.18)', strokeWidth: 0.5 }));
       }
-      for (let lat = 80; lat >= -60; lat -= 20) {
-        const y = ((84 - lat) / 144) * 500;
-        kids.push(E('line', { key: 'gh' + lat, x1: 0, y1: y, x2: 1000, y2: y, stroke: ink + '0.18)', strokeWidth: 0.5 }));
-      }
     }
 
     if (lv >= 3) {
