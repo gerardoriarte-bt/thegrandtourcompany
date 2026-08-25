@@ -2,43 +2,110 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "trailingSlash": false,
   "redirects": [
-    { "source": "/TGTC%20Website.dc.html", "destination": "/", "permanent": true },
-    { "source": "/Index.dc.html", "destination": "/grand-tour-index", "permanent": true },
-    { "source": "/Intelligence.dc.html", "destination": "/intelligence", "permanent": true },
-    { "source": "/Governance.dc.html", "destination": "/governance", "permanent": true },
-    { "source": "/Desire.dc.html", "destination": "/desire", "permanent": true },
-    { "source": "/Production.dc.html", "destination": "/production", "permanent": true },
-    { "source": "/Growth.dc.html", "destination": "/growth", "permanent": true }
+    {
+      "source": "/TGTC%20Website.dc.html",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/Index.dc.html",
+      "destination": "/grand-tour-index",
+      "permanent": true
+    },
+    {
+      "source": "/Intelligence.dc.html",
+      "destination": "/intelligence",
+      "permanent": true
+    },
+    {
+      "source": "/Governance.dc.html",
+      "destination": "/governance",
+      "permanent": true
+    },
+    {
+      "source": "/Desire.dc.html",
+      "destination": "/desire",
+      "permanent": true
+    },
+    {
+      "source": "/Production.dc.html",
+      "destination": "/production",
+      "permanent": true
+    },
+    {
+      "source": "/Growth.dc.html",
+      "destination": "/growth",
+      "permanent": true
+    }
   ],
   "rewrites": [
-    { "source": "/", "destination": "/TGTC%20Website.dc.html" },
-    { "source": "/grand-tour-index", "destination": "/Index.dc.html" },
-    { "source": "/intelligence", "destination": "/Intelligence.dc.html" },
-    { "source": "/governance", "destination": "/Governance.dc.html" },
-    { "source": "/desire", "destination": "/Desire.dc.html" },
-    { "source": "/production", "destination": "/Production.dc.html" },
-    { "source": "/growth", "destination": "/Growth.dc.html" }
+    {
+      "source": "/",
+      "destination": "/TGTC%20Website.dc.html"
+    },
+    {
+      "source": "/grand-tour-index",
+      "destination": "/Index.dc.html"
+    },
+    {
+      "source": "/intelligence",
+      "destination": "/Intelligence.dc.html"
+    },
+    {
+      "source": "/governance",
+      "destination": "/Governance.dc.html"
+    },
+    {
+      "source": "/desire",
+      "destination": "/Desire.dc.html"
+    },
+    {
+      "source": "/production",
+      "destination": "/Production.dc.html"
+    },
+    {
+      "source": "/growth",
+      "destination": "/Growth.dc.html"
+    }
   ],
   "headers": [
     {
-      "source": "/vendor/(.*)",
+      "source": "/(.*)\\.(js|svg|png)",
       "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=3600, must-revalidate"
+        }
       ]
     },
     {
-      "source": "/(.*)\\.(js|svg|png)",
+      "source": "/vendor/(.*)",
       "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=3600, must-revalidate" }
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
       ]
     },
     {
       "source": "/(.*)",
       "headers": [
-        { "key": "X-Content-Type-Options", "value": "nosniff" },
-        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
-        { "key": "X-Frame-Options", "value": "SAMEORIGIN" },
-        { "key": "Strict-Transport-Security", "value": "max-age=63072000; includeSubDomains; preload" }
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "SAMEORIGIN"
+        },
+        {
+          "key": "Strict-Transport-Security",
+          "value": "max-age=63072000; includeSubDomains; preload"
+        }
       ]
     }
   ]
