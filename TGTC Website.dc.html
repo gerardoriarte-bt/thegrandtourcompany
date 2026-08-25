@@ -181,23 +181,23 @@ a:hover{color:#EDE9DF}
 </section>
 
 <!-- PARTNERS AND ALLIES -->
-<section data-parch aria-label="Partners and Allies" style="background:#EDE9DF;color:#0D0E0C;padding:clamp(56px,6vw,80px) 0 0;border-top:1px solid rgba(13,14,12,0.14)">
+<section data-parch aria-label="Our Experience" style="background:#EDE9DF;color:#0D0E0C;padding:clamp(72px,8vw,104px) 0 0;border-top:1px solid rgba(13,14,12,0.14)">
   <div style="max-width:1440px;margin:0 auto;width:100%;padding:0 clamp(24px,5.5vw,80px)">
-    <div data-reveal style="display:flex;justify-content:space-between;align-items:baseline;gap:24px;flex-wrap:wrap;margin:0 0 clamp(36px,4vw,56px)">
-      <p style="margin:0;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.06em;color:rgba(13,14,12,0.62)">Partners and Allies</p>
-      <p style="margin:0;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.06em;color:rgba(13,14,12,0.45);font-variant-numeric:tabular-nums">{{ partnerMeta }}</p>
+    <div data-reveal style="display:flex;justify-content:space-between;align-items:baseline;gap:32px;flex-wrap:wrap;margin:0 0 clamp(44px,5vw,68px)">
+      <h2 style="margin:0;font-family:'Instrument Serif',serif;font-weight:400;font-size:clamp(30px,3.4vw,48px);line-height:1.08;letter-spacing:-0.02em">Our Experience</h2>
+      <p style="margin:0;max-width:30em;font-family:'IBM Plex Mono',monospace;font-size:11px;line-height:1.6;letter-spacing:0.06em;color:rgba(13,14,12,0.55);font-variant-numeric:tabular-nums">{{ partnerMeta }}</p>
     </div>
   </div>
   <div data-marqwrap style="position:relative;overflow:hidden;border-top:1px solid rgba(13,14,12,0.14);border-bottom:1px solid rgba(13,14,12,0.14)">
     <div data-marquee>
       <div style="display:flex">
         <sc-for list="{{ partners }}" as="p" hint-placeholder-count="17">
-          <span style="display:flex;align-items:center;white-space:nowrap;padding:0 clamp(28px,3.2vw,44px);height:clamp(88px,9vw,112px);border-right:1px solid rgba(13,14,12,0.14);font-family:'IBM Plex Mono',monospace;font-size:clamp(13px,1.15vw,15px);font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:rgba(13,14,12,0.82)">{{ p }}</span>
+          <span style="display:flex;align-items:center;white-space:nowrap;padding:0 clamp(28px,3.2vw,44px);height:clamp(104px,10vw,132px);border-right:1px solid rgba(13,14,12,0.14);font-family:'IBM Plex Mono',monospace;font-size:clamp(14px,1.3vw,17px);font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:rgba(13,14,12,0.82)">{{ p }}</span>
         </sc-for>
       </div>
       <div aria-hidden="true" style="display:flex">
         <sc-for list="{{ partners }}" as="p" hint-placeholder-count="17">
-          <span style="display:flex;align-items:center;white-space:nowrap;padding:0 clamp(28px,3.2vw,44px);height:clamp(88px,9vw,112px);border-right:1px solid rgba(13,14,12,0.14);font-family:'IBM Plex Mono',monospace;font-size:clamp(13px,1.15vw,15px);font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:rgba(13,14,12,0.82)">{{ p }}</span>
+          <span style="display:flex;align-items:center;white-space:nowrap;padding:0 clamp(28px,3.2vw,44px);height:clamp(104px,10vw,132px);border-right:1px solid rgba(13,14,12,0.14);font-family:'IBM Plex Mono',monospace;font-size:clamp(14px,1.3vw,17px);font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:rgba(13,14,12,0.82)">{{ p }}</span>
         </sc-for>
       </div>
     </div>
@@ -462,7 +462,7 @@ a:hover{color:#EDE9DF}
       </sc-for>
     </nav>
     <div style="margin-top:48px;padding-top:32px;border-top:1px solid rgba(237,233,223,0.12)">
-      <p style="margin:0 0 20px;font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.06em;color:rgba(237,233,223,0.55)">Offices</p>
+      <p style="margin:0 0 20px;font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.06em;color:rgba(237,233,223,0.55)">Where we are</p>
       <ul data-offices style="margin:0;padding:0;list-style:none;display:grid;gap:14px 24px;font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.06em;color:rgba(237,233,223,0.8)">
         <sc-for list="{{ offices }}" as="o" hint-placeholder-count="11">
           <li>{{ o }}</li>
@@ -895,7 +895,7 @@ class Component extends DCLogic {
         'Malaysia Airlines', 'Minor Hotel', 'MSC Cruises', 'Avianca', 'Clic Air',
         'GHL Hoteles', 'Procolombia'
       ],
-      partnerMeta: '17 partners — aviation, hospitality, cruise, connectivity, tourism boards',
+      partnerMeta: '17 partners across aviation, hospitality, cruise, connectivity and tourism boards',
       offices: [
         'Roma', 'London', 'Madrid', 'Miami', 'Bogotá', 'Medellín',
         'México', 'Santiago', 'Lima', 'Panamá', 'Caracas'
