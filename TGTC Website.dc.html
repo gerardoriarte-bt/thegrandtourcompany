@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Grand Tour Company — Marketing infrastructure for tourism economies</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:#0D0E0C;-webkit-font-smoothing:antialiased}
+a{color:#5E79E0;text-decoration:none}
+[data-parch] a{color:#1F3FD8}
+a:hover{color:#EDE9DF}
+:focus-visible{outline:1.5px solid #1F3FD8;outline-offset:4px}
+::selection{background:#1F3FD8;color:#EDE9DF}
+@keyframes tgtcRise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+@keyframes tgtcFade{from{opacity:0}to{opacity:1}}
+[data-fade]{animation:tgtcFade 300ms cubic-bezier(0.22,1,0.36,1) both}
+@keyframes tgtcDrop{0%{transform:translateY(0);opacity:.3}50%{transform:translateY(8px);opacity:1}100%{transform:translateY(0);opacity:.3}}
+[data-k1],[data-k2],[data-k3],[data-k4]{opacity:0;animation:tgtcRise 800ms cubic-bezier(0.22,1,0.36,1) forwards}
+[data-k2]{animation-delay:700ms}
+[data-k3]{animation-delay:1400ms}
+[data-k4]{animation-delay:1700ms}
+[data-scrollmark]{animation:tgtcDrop 2400ms cubic-bezier(0.22,1,0.36,1) infinite}
+[data-listwrap]{display:none}
+[data-navlink]::after{content:'';position:absolute;left:0;bottom:-6px;height:1px;width:0;background:currentColor;transition:width 200ms cubic-bezier(0.22,1,0.36,1)}
+[data-navlink]:hover::after{width:100%}
+[data-navlink][data-navactive="on"]::after{width:100%}
+[data-menubtn]{display:none}
+@media (max-width:1120px){
+ [data-navcenter]{display:none!important}
+ [data-navutil]{display:none!important}
+ [data-menubtn]{display:block!important}
+}
+[data-track]{scrollbar-width:none;-ms-overflow-style:none}
+[data-track]::-webkit-scrollbar{height:0;width:0}
+@media (prefers-reduced-motion: reduce){
+ [data-k1],[data-k2],[data-k3],[data-k4]{opacity:1;animation:none}
+ [data-scrollmark]{animation:none}
+ html{scroll-behavior:auto}
+}
+@media (max-width:900px){
+ [data-track]{flex-direction:column!important;overflow-x:visible!important}
+ [data-track]>*{min-width:0!important;width:100%!important;border-right:none!important;border-bottom:1px solid rgba(237,233,223,0.12)}
+ [data-split]{grid-template-columns:1fr!important;gap:48px!important}
+ [data-plotwrap]{display:none!important}
+ [data-listwrap]{display:block!important}
+ [data-doors]{grid-template-columns:1fr!important}
+ [data-doors]>*+*{border-left:none!important;border-top:1px solid rgba(13,14,12,0.14)}
+ [data-sitemap]{grid-template-columns:1fr!important;gap:40px!important}
+ [data-logogrid]{grid-template-columns:1fr 1fr!important}
+ [data-sticky]{position:static!important}
+}
+
+@media (max-width:640px){
+ [data-arg]{overflow-x:auto;-webkit-overflow-scrolling:touch;padding-bottom:8px}
+ [data-arg] div:has(> svg){min-width:600px}
+ [data-matrix]{min-width:560px}
+ [data-plotwrap]{overflow-x:auto}
+ [data-traj]{grid-template-columns:1fr 1fr!important}
+}
+@media (max-width:560px){
+ [data-brand]{max-width:62vw}
+ [data-desc]{white-space:normal;line-height:1.35}
+ [data-logogrid]{grid-template-columns:1fr!important}
+ [data-doors]{grid-template-columns:1fr!important}
+}
+</style>
+</helmet>
+
+{{ mapLayer }}
+
+<header style="position:fixed;top:0;left:0;right:0;z-index:20;height:64px;background:rgba(13,14,12,0.92);border-bottom:1px solid rgba(237,233,223,0.12)">
+  <div style="max-width:1440px;margin:0 auto;height:100%;padding:0 clamp(24px,5.5vw,80px);display:flex;align-items:center;justify-content:space-between;gap:40px">
+    <a data-brand href="#top" style="display:block;color:#EDE9DF;flex:0 0 auto">
+      <span style="display:block;font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.08em">THE GRAND TOUR COMPANY</span>
+      <span data-desc style="display:block;margin-top:3px;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.06em;color:rgba(237,233,223,0.5)">Marketing infrastructure for tourism economies.</span>
+    </a>
+    <nav data-navcenter aria-label="Layers" style="display:flex;gap:32px;align-items:center">
+      <sc-for list="{{ nav }}" as="n" hint-placeholder-count="5">
+        <a data-navlink data-navactive="{{ n.act }}" href="{{ n.href }}" style="position:relative;font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.06em;color:{{ n.color }}">{{ n.name }}</a>
+      </sc-for>
+    </nav>
+    <div data-navutil style="display:flex;gap:24px;align-items:center;font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.06em;flex:0 0 auto">
+      <a href="Index.dc.html" style="color:#5E79E0">Index</a>
+      <a href="#dispatch" style="color:rgba(237,233,223,0.8)">Contact</a>
+    </div>
+    <button data-menubtn type="button" onClick="{{ toggleMenu }}" style="background:transparent;border:0;color:#EDE9DF;font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.06em;cursor:pointer;padding:0">Menu</button>
+  </div>
+</header>
+
+<sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}">
+  <div data-fade style="position:fixed;inset:0;z-index:30;background:#0D0E0C;padding:20px clamp(24px,5.5vw,80px) 40px;display:flex;flex-direction:column;color:#EDE9DF;font-family:Inter,sans-serif;overflow-y:auto">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:24px;height:44px">
+      <span style="font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.08em">THE GRAND TOUR COMPANY</span>
+      <button type="button" onClick="{{ toggleMenu }}" style="background:transparent;border:0;color:#EDE9DF;font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.06em;cursor:pointer;padding:0">Close</button>
+    </div>
+    <div style="margin-top:32px;border-top:1px solid rgba(237,233,223,0.12)">
+      <sc-for list="{{ nav }}" as="n" hint-placeholder-count="5">
+        <a href="{{ n.href }}" onClick="{{ toggleMenu }}" style="display:flex;align-items:baseline;gap:20px;padding:20px 0;border-bottom:1px solid rgba(237,233,223,0.12);color:{{ n.color }}">
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.06em;color:rgba(237,233,223,0.55);font-variant-numeric:tabular-nums">{{ n.num }}</span>
+          <span style="font-size:20px;line-height:1.3">{{ n.name }}</span>
+        </a>
+      </sc-for>
+      <a href="Index.dc.html" onClick="{{ toggleMenu }}" style="display:block;padding:20px 0;border-bottom:1px solid rgba(237,233,223,0.12);font-family:'IBM Plex Mono',monospace;font-size:13px;letter-spacing:0.06em;color:#5E79E0">Index</a>
+      <a href="#dispatch" onClick="{{ toggleMenu }}" style="display:block;padding:20px 0;border-bottom:1px solid rgba(237,233,223,0.12);font-family:'IBM Plex Mono',monospace;font-size:13px;letter-spacing:0.06em;color:rgba(237,233,223,0.8)">Contact</a>
+    </div>
+  </div>
+</sc-if>
+
+<div id="top" style="position:relative;z-index:1;padding-top:64px;background:transparent;color:#EDE9DF;font-family:Inter,system-ui,sans-serif;font-weight:400;overflow-x:clip">
+
+<!-- 01 COLD OPEN -->
+<section style="min-height:100vh;display:flex;flex-direction:column;justify-content:center;position:relative;padding:120px 0">
+  <div style="max-width:1440px;margin:0 auto;width:100%;padding:0 clamp(24px,5.5vw,80px)">
+    <p data-k1 style="margin:0 0 56px;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.06em;color:rgba(237,233,223,0.55)">The Grand Tour Company</p>
+    <h1 style="margin:0;font-family:'Instrument Serif',serif;font-weight:400;font-size:clamp(48px,7.4vw,96px);line-height:1.05;letter-spacing:-0.02em;max-width:16em">
+      <span data-k2 style="display:block">Stop marketing destinations.</span>
+      <span data-k3 style="display:block;color:rgba(237,233,223,0.62)">Start engineering desire.</span>
+    </h1>
+    <p data-k4 style="margin:56px 0 0;font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.06em;color:rgba(237,233,223,0.55);max-width:34em;line-height:1.7">Marketing infrastructure for tourism economies.</p>
+  </div>
+  <div style="position:absolute;left:0;right:0;bottom:40px;max-width:1440px;margin:0 auto;padding:0 clamp(24px,5.5vw,80px);display:flex;justify-content:space-between;align-items:flex-end;gap:24px;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.06em;color:rgba(237,233,223,0.55);font-variant-numeric:tabular-nums">
+    <span>Rome · 41.9028° N, 12.4964° E</span>
+    <span data-scrollmark style="display:inline-block">Scroll ↓</span>
+  </div>
+</section>
+
+<!-- 02 DESCRIPTOR -->
+<section data-parch style="background:#EDE9DF;color:#0D0E0C;min-height:40vh;display:flex;align-items:center;padding:clamp(80px,10vw,128px) 0;border-top:1px solid rgba(13,14,12,0.14)">
+  <div style="max-width:1440px;margin:0 auto;width:100%;padding:0 clamp(24px,5.5vw,80px)">
+    <p style="margin:0 0 32px;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.06em;color:rgba(13,14,12,0.62)">02 — Descriptor</p>
+    <div data-reveal style="display:grid;gap:20px;max-width:56em;font-size:clamp(16px,1.35vw,18px);line-height:1.65">
+      <p style="margin:0">The Grand Tour Company builds marketing infrastructure for tourism economies.</p>
+      <p style="margin:0">We work with governments, cities, airlines and hospitality groups on positioning, governance, demand and cultural relevance.</p>
+      <p style="margin:0;color:rgba(13,14,12,0.6)">Built in Rome. Powered by LoBueno. Amplified by Stagwell.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 03 INDEX -->
+<section id="index" style="padding:clamp(96px,12vw,160px) 0;border-top:1px solid rgba(237,233,223,0.12);scroll-margin-top:64px">
+  <div style="max-width:1440px;margin:0 auto;padding:0 clamp(24px,5.5vw,80px)">
+    <div style="display:flex;justify-content:space-between;align-items:baseline;gap:24px;flex-wrap:wrap;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.06em;color:rgba(237,233,223,0.5);padding-bottom:20px;border-bottom:1px solid rgba(237,233,223,0.12)">
+      <span>03 — The Grand Tour Index</span>
+      <span>Diagnostic instrument · v1 sample data</span>
+    </div>
+    <h2 data-reveal style="margin:48px 0 0;font-family:'Instrument Serif',serif;font-weight:400;font-size:clamp(34px,4.4vw,60px);line-height:1.05;letter-spacing:-0.02em;max-width:24em">Desire is not the constraint. Conversion is.</h2>
+    <p data-reveal style="margin:24px 0 0;max-width:44em;font-size:17px;line-height:1.65;color:rgba(237,233,223,0.72)">Arrivals do not scale one-to-one with desire: proximity to source markets, air capacity and relative price set an expected level of conversion. The Index plots the residual against that expectation. Below the line is the finding.</p>
+
+    <div data-split style="display:grid;grid-template-columns:minmax(0,6fr) minmax(0,4fr);gap:64px;margin-top:72px;align-items:start">
+      <div style="min-width:0">
+        <div data-plotwrap>{{ plot }}</div>
+        <div data-listwrap>{{ list }}</div>
+        <p style="margin:20px 0 0;padding-top:16px;border-top:1px solid rgba(237,233,223,0.12);font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.06em;color:rgba(237,233,223,0.55);line-height:1.7;max-width:52em">v1 sample data. Country-level. Desire measured at t; conversion at t+1 to account for the observed lag between search intent and arrival.</p>
+      </div>
+
+      <div style="border-top:1px solid rgba(237,233,223,0.12);padding-top:24px;min-width:0">
+        <label for="tgtc-country" style="display:block;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.06em;color:rgba(237,233,223,0.5);margin-bottom:12px">Select market</label>
+        <select id="tgtc-country" value="{{ selIdx }}" onChange="{{ onSelect }}" style="width:100%;appearance:none;background:transparent;color:#EDE9DF;border:0;border-bottom:1px solid rgba(237,233,223,0.35);border-radius:0;padding:10px 2px;font-family:'IBM Plex Mono',monospace;font-size:13px;letter-spacing:0.06em">
+          <option value="" style="background:#0D0E0C">All markets — aggregate</option>
+          <sc-for list="{{ countries }}" as="c" hint-placeholder-count="6">
+            <option value="{{ c.i }}" style="background:#0D0E0C">{{ c.n }}</option>
+          </sc-for>
+        </select>
+
+        <sc-if value="{{ noSel }}" hint-placeholder-val="{{ true }}">
+          <div data-fade style="margin-top:40px;font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.06em;font-variant-numeric:tabular-nums">
+            <p style="margin:0 0 16px;color:rgba(237,233,223,0.55);font-size:11px">Aggregate distribution · 40 markets</p>
+            <sc-for list="{{ dist }}" as="d" hint-placeholder-count="5">
+              <div style="display:flex;justify-content:space-between;gap:16px;padding:13px 0;border-bottom:1px solid rgba(237,233,223,0.12)">
+                <span style="color:{{ d.color }}">{{ d.label }}</span>
+                <span style="color:rgba(237,233,223,0.75)">{{ d.count }}</span>
+              </div>
+            </sc-for>
+            <p style="margin:20px 0 0;font-size:10px;color:rgba(237,233,223,0.55);line-height:1.7">Residual measured in standard deviations from expected conversion.</p>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{ hasSel }}" hint-placeholder-val="{{ false }}">
+          <div data-fade style="margin-top:40px">
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.06em;font-variant-numeric:tabular-nums">
+              <div style="display:flex;justify-content:space-between;gap:16px;padding:13px 0;border-bottom:1px solid rgba(237,233,223,0.12)">
+                <span style="color:rgba(237,233,223,0.5)">Desire score</span><span>{{ desireStr }}</span>
+              </div>
+              <div style="display:flex;justify-content:space-between;gap:16px;padding:13px 0;border-bottom:1px solid rgba(237,233,223,0.12)">
+                <span style="color:rgba(237,233,223,0.5)">Conversion vs. expected</span><span style="color:{{ resColor }}">{{ resStr }}</span>
+              </div>
+              <div style="display:flex;justify-content:space-between;gap:16px;padding:13px 0;border-bottom:1px solid rgba(237,233,223,0.12)">
+                <span style="color:rgba(237,233,223,0.5)">Classification</span><span style="color:{{ resColor }}">{{ classStr }}</span>
+              </div>
+            </div>
+
+            <div style="margin-top:32px;padding-top:24px;border-top:1px solid rgba(237,233,223,0.12)">
+              <p style="margin:0 0 12px;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.06em;color:rgba(237,233,223,0.55)">Unrealized visitor economy</p>
+              <p style="margin:0;font-family:'IBM Plex Mono',monospace;font-size:22px;letter-spacing:0.02em;font-variant-numeric:tabular-nums;color:{{ resColor }}">{{ rangeStr }}</p>
+              <p style="margin:8px 0 0;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.06em;color:rgba(237,233,223,0.5)">80% confidence interval</p>
+              <p style="margin:12px 0 0;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.06em;color:rgba(237,233,223,0.55);line-height:1.7;max-width:34em">Upper-bound estimate of intent-implied demand not converted. Not a direct measure of suppressed demand.</p>
+            </div>
+
+            <div style="margin-top:32px;padding-top:24px;border-top:1px solid rgba(237,233,223,0.12)">
+              <p style="margin:0 0 18px;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.06em;color:rgba(237,233,223,0.55)">Friction diagnostic</p>
+              <sc-for list="{{ friction }}" as="f" hint-placeholder-count="4">
+                <div style="display:grid;grid-template-columns:1fr auto auto;gap:16px;align-items:center;padding:11px 0;border-bottom:1px solid rgba(237,233,223,0.12);font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.06em">
+                  <span style="color:rgba(237,233,223,0.72)">{{ f.label }}</span>
+                  <span style="display:flex;gap:3px">
+                    <sc-for list="{{ f.blocks }}" as="b" hint-placeholder-count="4">
+                      <span style="width:14px;height:8px;display:block;background:{{ b.bg }}"></span>
+                    </sc-for>
+                  </span>
+                  <span style="color:{{ f.color }};min-width:96px;text-align:right">{{ f.level }}</span>
+                </div>
+              </sc-for>
+            </div>
+
+            <p style="margin:24px 0 0"><a href="Index.dc.html#methodology" style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.06em">Methodology and known limitations →</a></p>
+          </div>
+        </sc-if>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 04 THESIS -->
+<section style="padding:clamp(96px,12vw,160px) 0 0;border-top:1px solid rgba(237,233,223,0.12)">
+  <div style="max-width:1440px;margin:0 auto;padding:0 clamp(24px,5.5vw,80px)">
+    <p style="margin:0 0 48px;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.06em;color:rgba(237,233,223,0.5)">04 — The thesis</p>
+    <div data-split style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:64px;align-items:start">
+      <div data-reveal style="min-width:0">
+        <h2 style="margin:0;font-family:'Instrument Serif',serif;font-weight:400;font-size:clamp(30px,3.4vw,48px);line-height:1.08;letter-spacing:-0.02em">Tourism still communicates like a brochure.</h2>
+        <p style="margin:24px 0 0;font-size:17px;line-height:1.65;color:rgba(237,233,223,0.72)">Seasonal campaigns, an annual media buy, a logo refresh every eight years, attribution nobody defends in a budget hearing. The category talks to travelers and reports to ministries in the same sentence.</p>
+        <p style="margin:20px 0 0;font-size:17px;line-height:1.65;color:rgba(237,233,223,0.72)">The mandate has changed. A visitor economy is a portfolio: allocation, governance, conversion. The instruments belong to other industries — and those are the industries the winners will behave like.</p>
+      </div>
+      <div style="min-width:0;overflow:hidden">
+      <div data-track style="display:flex;overflow-x:auto;gap:0;scroll-snap-type:x mandatory;padding-bottom:8px">
+        <sc-for list="{{ thesis }}" as="t" hint-placeholder-count="6">
+          <article style="min-width:340px;flex:0 0 340px;scroll-snap-align:start;border-right:1px solid rgba(237,233,223,0.12);padding:0 32px 40px 0;margin-right:32px">
+            <p style="margin:0 0 20px;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.06em;color:rgba(237,233,223,0.55);font-variant-numeric:tabular-nums">{{ t.num }}</p>
+            <h3 style="margin:0;font-family:'Instrument Serif',serif;font-weight:400;font-size:32px;line-height:1.1;letter-spacing:-0.02em">{{ t.title }}</h3>
+            <p style="margin:16px 0 0;font-size:16px;line-height:1.65;color:rgba(237,233,223,0.68)">{{ t.body }}</p>
+          </article>
+        </sc-for>
+      </div>
+      <div data-rail onPointerDown="{{ onRailDown }}" style="position:relative;height:52px;margin-top:16px;cursor:ew-resize;touch-action:none">
+        <div style="position:absolute;top:16px;left:0;right:0;height:2px;background:rgba(237,233,223,0.22)"></div>
+        <div style="position:absolute;top:16px;left:0;height:2px;background:#1F3FD8;width:{{ trackPct }};transition:width 120ms linear"></div>
+        <div style="position:absolute;top:22px;left:0;height:7px;width:1px;background:rgba(237,233,223,0.3)"></div>
+        <div style="position:absolute;top:22px;left:20%;height:7px;width:1px;background:rgba(237,233,223,0.3)"></div>
+        <div style="position:absolute;top:22px;left:40%;height:7px;width:1px;background:rgba(237,233,223,0.3)"></div>
+        <div style="position:absolute;top:22px;left:60%;height:7px;width:1px;background:rgba(237,233,223,0.3)"></div>
+        <div style="position:absolute;top:22px;left:80%;height:7px;width:1px;background:rgba(237,233,223,0.3)"></div>
+        <div style="position:absolute;top:22px;right:0;height:7px;width:1px;background:rgba(237,233,223,0.3)"></div>
+        <div style="position:absolute;top:17px;left:{{ trackPct }};transform:translate(-50%,-50%);transition:left 120ms linear">
+          <svg width="30" height="30" viewBox="0 0 16 16" aria-hidden="true" style="display:block;overflow:visible">
+            <path d="M15 8 L1 1 L6.5 8 L1 15 Z" fill="#1F3FD8" stroke="#EDE9DF" stroke-width="0.6"></path>
+          </svg>
+        </div>
+        <div style="position:absolute;top:34px;left:0;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.06em;color:rgba(237,233,223,0.55);font-variant-numeric:tabular-nums">{{ trackLabel }} — drag or scroll</div>
+      </div>
+      </div>
+    </div>
+    <div data-reveal style="margin-top:96px;padding:64px 0 clamp(96px,12vw,160px);border-top:1px solid rgba(237,233,223,0.12);display:flex;justify-content:center">
+      <p style="margin:0;max-width:22em;text-align:center;font-family:'Instrument Serif',serif;font-weight:400;font-size:clamp(32px,4.6vw,64px);line-height:1.05;letter-spacing:-0.02em">The destinations that win the next twenty years will not be the most beautiful. They will be the most culturally magnetic.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 05 THE STACK -->
+<section id="stack" style="border-top:1px solid rgba(237,233,223,0.12);padding:clamp(96px,12vw,160px) 0;scroll-margin-top:64px">
+  <div style="max-width:1440px;margin:0 auto;padding:0 clamp(24px,5.5vw,80px)">
+    <p style="margin:0 0 48px;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.06em;color:rgba(237,233,223,0.5)">05 — The stack</p>
+    <div data-split style="display:grid;grid-template-columns:4fr 6fr;gap:64px;align-items:start">
+      <div data-sticky style="position:sticky;top:80px">
+        <h2 style="margin:0;font-family:'Instrument Serif',serif;font-weight:400;font-size:clamp(30px,3.4vw,48px);line-height:1.08;letter-spacing:-0.02em">Five layers. One operating system.</h2>
+        <p style="margin:24px 0 0;font-size:17px;line-height:1.65;color:rgba(237,233,223,0.72)">Each layer is an instrument with its own mandate, its own data and its own reporting line. They are deployed in sequence, not in parallel.</p>
+        <p style="margin:32px 0 0;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.06em;color:rgba(237,233,223,0.55)">Layer {{ activeLayerLabel }} active</p>
+      </div>
+      <div>
+        <sc-for list="{{ layers }}" as="l" hint-placeholder-count="5">
+          <article data-layer style="border-top:1px solid rgba(237,233,223,0.12);padding:40px 0">
+            <p style="margin:0 0 16px;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.06em;color:rgba(237,233,223,0.55);font-variant-numeric:tabular-nums">{{ l.num }}</p>
+            <h3 style="margin:0;font-family:'Instrument Serif',serif;font-weight:400;font-size:clamp(28px,3vw,42px);line-height:1.08;letter-spacing:-0.02em">{{ l.name }}</h3>
+            <p style="margin:14px 0 28px;font-size:17px;line-height:1.65;color:rgba(237,233,223,0.72);max-width:36em">{{ l.def }}</p>
+            <ul style="margin:0 0 28px;padding:0;list-style:none;display:grid;gap:10px;font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.06em;color:rgba(237,233,223,0.6)">
+              <sc-for list="{{ l.caps }}" as="cap" hint-placeholder-count="5">
+                <li style="display:flex;gap:12px"><span style="color:rgba(237,233,223,0.3)">·</span><span>{{ cap }}</span></li>
+              </sc-for>
+            </ul>
+            <a href="{{ l.href }}" style="font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.06em">{{ l.link }} →</a>
+          </article>
+        </sc-for>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 06 TWO DOORS -->
+<section id="public" data-parch style="background:#EDE9DF;color:#0D0E0C;padding:clamp(96px,12vw,160px) 0;border-top:1px solid rgba(13,14,12,0.14);scroll-margin-top:64px">
+  <div style="max-width:1440px;margin:0 auto;padding:0 clamp(24px,5.5vw,80px)">
+    <p style="margin:0 0 64px;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.06em;color:rgba(13,14,12,0.62)">06 — Two doors</p>
+    <div data-doors style="display:grid;grid-template-columns:1fr 1fr">
+      <div style="padding:0 clamp(24px,4vw,64px) 0 0">
+        <h3 style="margin:0;font-family:'Instrument Serif',serif;font-weight:400;font-size:clamp(28px,3.2vw,44px);line-height:1.08;letter-spacing:-0.02em">For nations and cities</h3>
+        <p style="margin:20px 0 0;font-size:17px;line-height:1.65;color:rgba(13,14,12,0.7);max-width:30em">Governance frameworks, policy alignment, development planning, monitoring and evaluation. We work inside the mandate, with the ministry's reporting cycle as the deadline.</p>
+        <p style="margin:24px 0 32px;font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.06em;color:rgba(13,14,12,0.62)">Ministries · regional authorities · city governments · DMOs</p>
+        <a href="#public" style="font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.06em">Request a governance diagnostic →</a>
+      </div>
+      <div style="padding:0 0 0 clamp(24px,4vw,64px);border-left:1px solid rgba(13,14,12,0.14)">
+        <h3 style="margin:0;font-family:'Instrument Serif',serif;font-weight:400;font-size:clamp(28px,3.2vw,44px);line-height:1.08;letter-spacing:-0.02em">For brands and operators</h3>
+        <p style="margin:20px 0 0;font-size:17px;line-height:1.65;color:rgba(13,14,12,0.7);max-width:30em">Route and network demand, hospitality portfolio positioning, experience products, source-market allocation. Commercial instruments, measured against revenue.</p>
+        <p style="margin:24px 0 32px;font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.06em;color:rgba(13,14,12,0.62)">Airlines · hotel groups · operators · retail and rail</p>
+        <a href="#commercial" style="font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.06em">Request a demand assessment →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 07 MANDATES -->
+<section style="padding:clamp(96px,12vw,160px) 0;border-top:1px solid rgba(237,233,223,0.12)">
+  <div style="max-width:1440px;margin:0 auto;padding:0 clamp(24px,5.5vw,80px)">
+    <p style="margin:0 0 48px;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.06em;color:rgba(237,233,223,0.5)">07 — Mandates</p>
+    <div data-split style="display:grid;grid-template-columns:4fr 6fr;gap:64px;align-items:start">
+      <div data-reveal>
+        <h2 style="margin:0;font-family:'Instrument Serif',serif;font-weight:400;font-size:clamp(30px,3.4vw,48px);line-height:1.08;letter-spacing:-0.02em">The decisions institutions do not delegate twice.</h2>
+        <p style="margin:24px 0 0;font-size:17px;line-height:1.65;color:rgba(237,233,223,0.72)">A national positioning framework, a source-market reallocation, a ten-year visitor economy plan. These are appointments, not projects. Below: the coordinates of the mandates currently in force.</p>
+      </div>
+      <div data-logogrid style="display:grid;grid-template-columns:1fr 1fr 1fr;border-top:1px solid rgba(237,233,223,0.12);border-left:1px solid rgba(237,233,223,0.12)">
+        <sc-for list="{{ mandates }}" as="m" hint-placeholder-count="9">
+          <div style="border-right:1px solid rgba(237,233,223,0.12);border-bottom:1px solid rgba(237,233,223,0.12);background:rgba(237,233,223,0.04);padding:24px 20px;min-height:168px;display:flex;flex-direction:column;justify-content:space-between;gap:24px">
+            <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.06em;font-variant-numeric:tabular-nums">
+              <span style="color:rgba(237,233,223,0.55)">{{ m.num }}</span>
+              <span style="color:#5E79E0">{{ m.type }}</span>
+            </div>
+            <div>
+              <p style="margin:0 0 10px;font-family:'IBM Plex Mono',monospace;font-size:13px;font-weight:500;letter-spacing:0.06em;color:#EDE9DF;line-height:1.45">{{ m.name }}</p>
+              <div style="height:1px;background:rgba(237,233,223,0.18);margin:0 0 10px"></div>
+              <p style="margin:0;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.06em;color:rgba(237,233,223,0.65);font-variant-numeric:tabular-nums">{{ m.coord }}</p>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+
+    <div style="margin-top:80px;border-top:1px solid rgba(237,233,223,0.12)">
+      <p style="margin:24px 0 0;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.06em;color:rgba(237,233,223,0.55)">Archive records</p>
+      <sc-for list="{{ records }}" as="r" hint-placeholder-count="2">
+        <div data-split style="display:grid;grid-template-columns:4fr 2fr 1fr 3fr;gap:32px;padding:28px 0;border-bottom:1px solid rgba(237,233,223,0.12);align-items:baseline">
+          <span style="font-family:'Instrument Serif',serif;font-size:26px;line-height:1.15;letter-spacing:-0.02em">{{ r.title }}</span>
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.06em;color:rgba(237,233,223,0.55)">{{ r.type }}</span>
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.06em;color:rgba(237,233,223,0.55);font-variant-numeric:tabular-nums">{{ r.year }}</span>
+          <span style="font-size:15px;line-height:1.6;color:rgba(237,233,223,0.7)">{{ r.outcome }}</span>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+</section>
+
+<!-- 08 DISPATCH -->
+<section id="dispatch" style="padding:clamp(96px,12vw,160px) 0;border-top:1px solid rgba(237,233,223,0.12);scroll-margin-top:64px">
+  <div style="max-width:1440px;margin:0 auto;padding:0 clamp(24px,5.5vw,80px)">
+    <div data-split style="display:grid;grid-template-columns:4fr 6fr;gap:64px;align-items:start">
+      <div>
+        <p style="margin:0 0 48px;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.06em;color:rgba(237,233,223,0.5)">08 — Dispatch</p>
+        <h2 style="margin:0;font-family:'Instrument Serif',serif;font-weight:400;font-size:clamp(30px,3.4vw,48px);line-height:1.08;letter-spacing:-0.02em">Quarterly intelligence.</h2>
+      </div>
+      <div>
+        <p style="margin:0 0 40px;font-size:17px;line-height:1.65;color:rgba(237,233,223,0.72);max-width:36em">Each quarter we release the Index movement — which markets closed their conversion gap, which surrendered it, and the allocation decisions behind both. Circulated to ministries and operator boards only.</p>
+        <form onSubmit="{{ onSubmit }}" style="display:flex;gap:24px;align-items:flex-end;flex-wrap:wrap;max-width:36em">
+          <label for="tgtc-email" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">Institutional email</label>
+          <input id="tgtc-email" type="email" required placeholder="name@ministry.gov" style="flex:1 1 260px;background:transparent;color:#EDE9DF;border:0;border-bottom:1px solid rgba(237,233,223,0.35);border-radius:0;padding:12px 2px;font-family:'IBM Plex Mono',monospace;font-size:14px;letter-spacing:0.06em">
+          <button type="submit" style="background:transparent;color:#5E79E0;border:0;border-bottom:1px solid #1F3FD8;border-radius:0;padding:12px 0;cursor:pointer;font-family:'IBM Plex Mono',monospace;font-size:13px;letter-spacing:0.06em">{{ dispatchCta }}</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 09 CLOSE -->
+<section style="min-height:100vh;display:flex;flex-direction:column;justify-content:space-between;padding:clamp(64px,8vw,96px) 0 40px;border-top:1px solid rgba(237,233,223,0.12)">
+  <div style="max-width:1440px;margin:0 auto;width:100%;padding:0 clamp(24px,5.5vw,80px)">
+    <p style="margin:0;font-family:'Instrument Serif',serif;font-weight:400;font-size:clamp(30px,3.6vw,52px);line-height:1.08;letter-spacing:-0.02em;max-width:26em">Marketing infrastructure for tourism economies.</p>
+  </div>
+  <div style="max-width:1440px;margin:0 auto;width:100%;padding:0 clamp(24px,5.5vw,80px)">
+    <nav aria-label="Sitemap" data-sitemap style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:48px;border-top:1px solid rgba(237,233,223,0.12);padding-top:32px;font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.06em">
+      <sc-for list="{{ sitemap }}" as="col" hint-placeholder-count="3">
+        <div>
+          <p style="margin:0 0 20px;color:rgba(237,233,223,0.55)">{{ col.head }}</p>
+          <ul style="margin:0;padding:0;list-style:none;display:grid;gap:12px">
+            <sc-for list="{{ col.items }}" as="it" hint-placeholder-count="5">
+              <li><a href="#sitemap" style="color:rgba(237,233,223,0.8)">{{ it }}</a></li>
+            </sc-for>
+          </ul>
+        </div>
+      </sc-for>
+    </nav>
+    <div style="display:flex;justify-content:space-between;align-items:baseline;gap:24px;flex-wrap:wrap;margin-top:48px;padding-top:20px;border-top:1px solid rgba(237,233,223,0.12);font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.06em;color:rgba(237,233,223,0.55);font-variant-numeric:tabular-nums">
+      <span>The Grand Tour Company · Via del Corso, Rome · 41.9028° N, 12.4964° E</span>
+      <span style="display:flex;gap:16px"><a href="#en" style="color:#EDE9DF">EN</a><a href="#it" style="color:rgba(237,233,223,0.55)">IT</a><a href="#es" style="color:rgba(237,233,223,0.55)">ES</a></span>
+    </div>
+  </div>
+</section>
+
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;signal&quot;:{&quot;editor&quot;:&quot;color&quot;,&quot;default&quot;:&quot;#3A55A8&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;options&quot;:[&quot;#1F3FD8&quot;,&quot;#2B4FE0&quot;,&quot;#3A55A8&quot;],&quot;section&quot;:&quot;Color&quot;},&quot;leakage&quot;:{&quot;editor&quot;:&quot;color&quot;,&quot;default&quot;:&quot;#B23A2F&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;options&quot;:[&quot;#B23A2F&quot;,&quot;#8F2F27&quot;,&quot;#C0463A&quot;],&quot;section&quot;:&quot;Color&quot;},&quot;staticMap&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Map&quot;},&quot;mapDensity&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;default&quot;:1,&quot;min&quot;:1,&quot;max&quot;:3,&quot;step&quot;:1,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Map&quot;}}">
+class Component extends DCLogic {
+  state = { level: 0, sel: null, active: 0, sent: false };
+
+  raw = [
+    ['Italy',96.2,0.4],['France',94.1,0.2],['Japan',92.4,-0.1],['Spain',90.3,1.3],
+    ['Greece',86.1,0.6],['Portugal',78.4,0.2],['Morocco',72.4,-0.2],['Egypt',74.1,-1.6],
+    ['Türkiye',76.3,1.1],['Croatia',68.2,0.3],['Iceland',71.5,-0.1],['Norway',66.4,-0.2],
+    ['Kenya',63.2,-1.2],['Tanzania',61.4,-0.2],['Rwanda',48.6,0.1],['South Africa',69.3,-1.1],
+    ['Namibia',44.2,-0.2],['Jordan',57.4,-1.9],['Saudi Arabia',59.1,-0.8],['United Arab Emirates',73.2,1.6],
+    ['Qatar',51.3,0.9],['India',82.4,-2.1],['Nepal',55.2,-0.3],['Sri Lanka',58.3,-0.6],
+    ['Thailand',88.2,1.2],['Vietnam',79.4,0.3],['Indonesia',81.1,-0.5],['Philippines',66.2,-0.2],
+    ['South Korea',84.3,0.2],['China',77.2,-1.4],['Australia',74.4,-0.1],['New Zealand',72.1,0.2],
+    ['Brazil',80.3,-1.3],['Peru',64.4,-0.2],['Argentina',67.2,0.1],['Chile',56.4,0.2],
+    ['Colombia',65.1,-0.7],['Mexico',83.2,1.4],['Canada',70.4,-0.1],['United States',91.3,0.3]
+  ];
+
+  classes = [
+    { key: 'leak', label: 'Demand leakage' },
+    { key: 'under', label: 'Underconversion' },
+    { key: 'exp', label: 'As expected' },
+    { key: 'above', label: 'Above expected' },
+    { key: 'surplus', label: 'Conversion surplus' }
+  ];
+
+  polys = [
+    [[-17,14],[0,20],[10,32],[20,32],[32,31],[43,12],[51,12],[41,-1],[40,-15],[35,-25],[25,-34],[18,-34],[12,-18],[9,4],[-8,4]],
+    [[-10,36],[0,44],[15,46],[30,40],[45,40],[60,25],[70,20],[78,8],[90,22],[100,14],[105,10],[110,20],[120,30],[127,34],[136,35],[141,45],[146,50],[160,60],[179,65],[179,72],[140,75],[110,76],[80,74],[60,72],[30,70],[15,68],[5,60],[-5,58],[-10,50]],
+    [[-168,65],[-160,58],[-140,60],[-125,49],[-120,35],[-110,25],[-98,18],[-88,20],[-80,25],[-75,35],[-65,45],[-55,50],[-60,58],[-75,62],[-85,70],[-100,72],[-125,70],[-140,70]],
+    [[-45,60],[-25,70],[-20,78],[-40,83],[-58,78],[-55,68]],
+    [[-80,10],[-70,10],[-60,5],[-50,0],[-35,-5],[-38,-15],[-48,-25],[-58,-35],[-65,-45],[-72,-53],[-75,-45],[-72,-30],[-70,-18],[-80,-5]],
+    [[113,-22],[122,-18],[130,-12],[142,-11],[145,-18],[150,-25],[150,-37],[140,-38],[130,-32],[115,-35]]
+  ];
+
+  coords = [
+    ['Rome',12.5,41.9],['Riyadh',46.7,24.7],['Nairobi',36.8,-1.3],['Singapore',103.8,1.35],
+    ['Bogotá',-74.1,4.7],['Reykjavík',-21.9,64.1],['Seoul',127,37.6],['Cape Town',18.4,-33.9],
+    ['Doha',51.5,25.3],['Lisbon',-9.1,38.7],['Mexico City',-99.1,19.4],['Tokyo',139.7,35.7]
+  ];
+
+  componentDidMount() {
+    this.onScroll = () => {
+      const h = document.documentElement.scrollHeight - window.innerHeight;
+      const p = h > 0 ? window.scrollY / h : 0;
+      const lv = p < 0.11 ? 0 : p < 0.28 ? 1 : p < 0.48 ? 2 : p < 0.8 ? 3 : 4;
+      if (lv !== this.state.level) this.setState({ level: lv });
+      const layers = document.querySelectorAll('[data-layer]');
+      let a = this.state.active;
+      layers.forEach((el, i) => { const r = el.getBoundingClientRect(); if (r.top < window.innerHeight * 0.55) a = i; });
+      if (a !== this.state.active) this.setState({ active: a });
+    };
+    window.addEventListener('scroll', this.onScroll, { passive: true });
+    this.onScroll();
+    this.track = document.querySelector('[data-track]');
+    if (this.track) {
+      this.onTrack = () => {
+        const max = this.track.scrollWidth - this.track.clientWidth;
+        const p = max > 4 ? this.track.scrollLeft / max : 0;
+        this.setState({ trackP: p });
+      };
+      this.track.addEventListener('scroll', this.onTrack, { passive: true });
+      this.onWheel = e => {
+        if (Math.abs(e.deltaY) <= Math.abs(e.deltaX)) return;
+        const max = this.track.scrollWidth - this.track.clientWidth;
+        const next = this.track.scrollLeft + e.deltaY;
+        if ((e.deltaY > 0 && this.track.scrollLeft >= max - 1) || (e.deltaY < 0 && this.track.scrollLeft <= 0)) return;
+        e.preventDefault();
+        this.track.scrollLeft = Math.max(0, Math.min(max, next));
+      };
+      this.track.addEventListener('wheel', this.onWheel, { passive: false });
+    }
+    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      const io = new IntersectionObserver(es => es.forEach(e => {
+        if (e.isIntersecting) { e.target.style.opacity = 1; e.target.style.transform = 'none'; io.unobserve(e.target); }
+      }), { threshold: 0.1 });
+      document.querySelectorAll('[data-reveal]').forEach(el => {
+        el.style.opacity = 0; el.style.transform = 'translateY(12px)';
+        el.style.transition = 'opacity 700ms cubic-bezier(0.22,1,0.36,1), transform 700ms cubic-bezier(0.22,1,0.36,1)';
+        io.observe(el);
+      });
+    }
+  }
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this.onScroll);
+    if (this.track && this.onTrack) this.track.removeEventListener('scroll', this.onTrack);
+    if (this.track && this.onWheel) this.track.removeEventListener('wheel', this.onWheel);
+  }
+
+  get signal() { return this.props.signal || '#1F3FD8'; }
+  get leakage() { return this.props.leakage || '#B23A2F'; }
+  get signalText() { return '#5E79E0'; }
+  get leakageText() { return '#CE5A4D'; }
+
+  band(x) { return 0.55 + 0.55 * Math.abs(x - 50) / 50; }
+
+  rows() {
+    if (this._rows) return this._rows;
+    this._rows = this.raw.map((r, i) => {
+      const d = r[1], res = r[2];
+      const cls = res <= -1 ? 'leak' : res < -0.3 ? 'under' : res <= 0.3 ? 'exp' : res < 1 ? 'above' : 'surplus';
+      const base = Math.abs(Math.min(0, res + 0.3)) * d * 0.045;
+      return {
+        i, n: r[0], d, res, cls,
+        lo: base * 0.78, hi: base * 1.32,
+        inBand: Math.abs(res) <= this.band(d),
+        friction: [
+          ['Visa regime', 1 + ((i * 5 + (res < -0.3 ? 6 : 1)) % 4)],
+          ['Air connectivity', 1 + ((i * 3 + (res < -0.3 ? 5 : 0)) % 4)],
+          ['Relative price', 1 + ((i * 7 + 2) % 4)],
+          ['Perceived safety', 1 + ((i * 11 + (res < -1 ? 7 : 1)) % 4)]
+        ]
+      };
+    });
+    return this._rows;
+  }
+
+  clsColor(cls) {
+    if (cls === 'leak') return this.leakageText;
+    if (cls === 'under') return '#D9776B';
+    if (cls === 'surplus' || cls === 'above') return this.signalText;
+    return 'rgba(237,233,223,0.62)';
+  }
+  clsLabel(cls) { return this.classes.find(c => c.key === cls).label; }
+
+  inPoly(x, y, poly) {
+    let inside = false;
+    for (let i = 0, j = poly.length - 1; i < poly.length; j = i++) {
+      const xi = poly[i][0], yi = poly[i][1], xj = poly[j][0], yj = poly[j][1];
+      if (((yi > y) !== (yj > y)) && (x < (xj - xi) * (y - yi) / (yj - yi) + xi)) inside = !inside;
+    }
+    return inside;
+  }
+
+  dots() {
+    const step = 3.6 - (this.props.mapDensity != null ? this.props.mapDensity : 2) * 0.6;
+    if (this._dots && this._dotStep === step) return this._dots;
+    const out = [];
+    for (let lon = -178; lon < 180; lon += step * 1.25) {
+      for (let lat = 80; lat > -58; lat -= step) {
+        if (this.polys.some(p => this.inPoly(lon, lat, p))) {
+          out.push([((lon + 180) / 360) * 1000, ((84 - lat) / 144) * 500]);
+        }
+      }
+    }
+    this._dots = out; this._dotStep = step;
+    return out;
+  }
+
+  mapLayerEl() {
+    const lv = this.props.staticMap ? 4 : this.state.level;
+    const E = React.createElement;
+    const kids = [];
+    const ink = 'rgba(237,233,223,';
+
+    this.dots().forEach((p, i) => kids.push(E('rect', { key: 'd' + i, x: p[0], y: p[1], width: 1.5, height: 1.5, fill: ink + '0.85)' })));
+
+    if (lv >= 2) {
+      for (let lon = -180; lon <= 180; lon += 30) {
+        const x = ((lon + 180) / 360) * 1000;
+        kids.push(E('line', { key: 'gv' + lon, x1: x, y1: 0, x2: x, y2: 500, stroke: ink + '0.28)', strokeWidth: 0.5 }));
+      }
+      for (let lat = 80; lat >= -60; lat -= 20) {
+        const y = ((84 - lat) / 144) * 500;
+        kids.push(E('line', { key: 'gh' + lat, x1: 0, y1: y, x2: 1000, y2: y, stroke: ink + (lat === 0 ? '0.45)' : '0.28)'), strokeWidth: lat === 0 ? 0.8 : 0.5 }));
+      }
+    }
+
+    if (lv >= 3) {
+      const hubs = this.coords.slice(0, 6);
+      hubs.forEach((c, i) => {
+        const x = ((c[1] + 180) / 360) * 1000, y = ((84 - c[2]) / 144) * 500;
+        [6, 13, 21].forEach((r, j) => kids.push(E('circle', { key: 'r' + i + j, cx: x, cy: y, r, fill: 'none', stroke: this.signal, strokeWidth: 0.6, opacity: 0.55 - j * 0.13 })));
+      });
+      for (let i = 1; i < hubs.length; i++) {
+        const a = hubs[0], b = hubs[i];
+        const ax = ((a[1] + 180) / 360) * 1000, ay = ((84 - a[2]) / 144) * 500;
+        const bx = ((b[1] + 180) / 360) * 1000, by = ((84 - b[2]) / 144) * 500;
+        kids.push(E('path', { key: 'a' + i, d: 'M' + ax + ' ' + ay + ' Q' + (ax + bx) / 2 + ' ' + (Math.min(ay, by) - 40) + ' ' + bx + ' ' + by, fill: 'none', stroke: this.signal, strokeWidth: 0.6, opacity: 0.5 }));
+      }
+    }
+
+    if (lv >= 4) {
+      this.coords.forEach((c, i) => {
+        const x = ((c[1] + 180) / 360) * 1000, y = ((84 - c[2]) / 144) * 500;
+        kids.push(E('line', { key: 'cx' + i, x1: x - 5, y1: y, x2: x + 5, y2: y, stroke: this.signal, strokeWidth: 0.7 }));
+        kids.push(E('line', { key: 'cy' + i, x1: x, y1: y - 5, x2: x, y2: y + 5, stroke: this.signal, strokeWidth: 0.7 }));
+        kids.push(E('text', { key: 'ct' + i, x: x + 8, y: y - 6, fill: ink + '0.75)', fontSize: 7, fontFamily: 'IBM Plex Mono, monospace', letterSpacing: '0.06em' }, c[0]));
+      });
+    }
+
+    const op = [0.09, 0.13, 0.17, 0.21, 0.3][lv];
+    return E('div', {
+      'aria-hidden': 'true',
+      style: {
+        position: 'fixed', inset: 0, zIndex: 0, pointerEvents: 'none',
+        display: 'flex', alignItems: 'center', justifyContent: 'center',
+        opacity: op, transition: 'opacity 800ms cubic-bezier(0.22,1,0.36,1)'
+      }
+    }, E('svg', { viewBox: '0 0 1000 500', preserveAspectRatio: 'xMidYMid slice', style: { width: '118%', height: '100%' } }, kids));
+  }
+
+  plotEl() {
+    const E = React.createElement, rows = this.rows();
+    const L = 74, R = 612, T = 44, B = 430;
+    const X = v => L + (v / 100) * (R - L);
+    const Y = r => (T + B) / 2 - (r / 2.5) * ((B - T) / 2);
+    const rule = 'rgba(237,233,223,0.3)';
+    const kids = [];
+
+    let top = '', bot = '';
+    for (let x = 0; x <= 100; x += 5) {
+      top += (x === 0 ? 'M' : 'L') + X(x) + ' ' + Y(this.band(x)) + ' ';
+    }
+    for (let x = 100; x >= 0; x -= 5) {
+      bot += 'L' + X(x) + ' ' + Y(-this.band(x)) + ' ';
+    }
+    kids.push(E('path', { key: 'band', d: top + bot + 'Z', fill: this.signal, opacity: 0.06 }));
+
+    kids.push(E('line', { key: 'axx', x1: L, y1: B, x2: R, y2: B, stroke: rule, strokeWidth: 0.8 }));
+    kids.push(E('line', { key: 'axy', x1: L, y1: T, x2: L, y2: B, stroke: rule, strokeWidth: 0.8 }));
+    [0, 25, 50, 75, 100].forEach(t => {
+      kids.push(E('line', { key: 'tx' + t, x1: X(t), y1: B, x2: X(t), y2: B + 5, stroke: rule, strokeWidth: 0.8 }));
+      kids.push(E('text', { key: 'lx' + t, x: X(t), y: B + 18, fill: 'rgba(237,233,223,0.55)', fontSize: 10, textAnchor: 'middle', fontFamily: 'IBM Plex Mono, monospace', letterSpacing: '0.06em' }, t));
+    });
+    [2, 1, -1, -2].forEach(t => {
+      kids.push(E('line', { key: 'gy' + t, x1: L, y1: Y(t), x2: R, y2: Y(t), stroke: 'rgba(237,233,223,0.08)', strokeWidth: 0.5 }));
+      kids.push(E('text', { key: 'ly' + t, x: L - 8, y: Y(t) + 3.5, fill: 'rgba(237,233,223,0.55)', fontSize: 10, textAnchor: 'end', fontFamily: 'IBM Plex Mono, monospace', letterSpacing: '0.06em' }, (t > 0 ? '+' : '−') + Math.abs(t).toFixed(1) + 'σ'));
+    });
+    kids.push(E('line', { key: 'zero', x1: L, y1: Y(0), x2: R, y2: Y(0), stroke: 'rgba(237,233,223,0.5)', strokeWidth: 1 }));
+    kids.push(E('text', { key: 'zerot', x: R, y: Y(0) - 8, fill: 'rgba(237,233,223,0.6)', fontSize: 11, textAnchor: 'end', fontFamily: 'IBM Plex Mono, monospace', letterSpacing: '0.06em' }, 'expected'));
+    kids.push(E('text', { key: 'axt', x: L, y: B + 40, fill: 'rgba(237,233,223,0.6)', fontSize: 11, fontFamily: 'IBM Plex Mono, monospace', letterSpacing: '0.06em' }, 'Desire score'));
+    kids.push(E('text', { key: 'ayt', x: 16, y: T, fill: 'rgba(237,233,223,0.6)', fontSize: 11, fontFamily: 'IBM Plex Mono, monospace', letterSpacing: '0.06em', transform: 'rotate(-90 16 ' + T + ')', textAnchor: 'end' }, 'Conversion vs. expected'));
+
+    const labels = [];
+    rows.forEach(c => {
+      const isSel = c.i === this.state.sel, x = X(c.d), y = Y(c.res);
+      let props = { key: 'p' + c.i, cx: x, cy: y, style: { cursor: 'pointer' }, onClick: () => this.setState({ sel: c.i }) };
+      let labelled = true;
+      if (c.res <= -1) props = { ...props, r: 3.5, fill: this.leakage };
+      else if (c.res < -0.3) props = { ...props, r: 3, fill: this.leakage, opacity: 0.55 };
+      else if (c.res >= 1) props = { ...props, r: 3.5, fill: 'none', stroke: this.signal, strokeWidth: 2 };
+      else if (c.res > 0.3) props = { ...props, r: 3.2, fill: 'none', stroke: this.signal, strokeWidth: 1.4 };
+      else { props = { ...props, r: 2.5, fill: 'none', stroke: rule, strokeWidth: 1 }; labelled = false; }
+      kids.push(E('circle', props));
+      if (isSel) {
+        const col = this.clsColor(c.cls);
+        kids.push(E('line', { key: 'sy' + c.i, x1: x, y1: Y(0), x2: x, y2: y, stroke: col, strokeWidth: 0.7 }));
+        kids.push(E('circle', { key: 'sh' + c.i, cx: x, cy: y, r: 8, fill: 'none', stroke: col, strokeWidth: 0.7 }));
+      }
+      if (labelled || isSel) labels.push({ c, x, y, isSel });
+    });
+
+    const placed = [{ x1: R - 70, x2: R, y1: Y(0) - 18, y2: Y(0) - 2 }];
+    const hit = (b) => placed.some(p => !(b.x2 < p.x1 || b.x1 > p.x2 || b.y2 < p.y1 || b.y1 > p.y2));
+    labels.sort((a, b) => a.y - b.y).forEach(l => {
+      const w = l.c.n.length * 6.2 + 6;
+      const cand = [];
+      [0, -10, 10, -20, 20].forEach(dy => {
+        cand.push({ anchor: 'start', x: l.x + 9, y: l.y + 3.5 + dy });
+        cand.push({ anchor: 'end', x: l.x - 9, y: l.y + 3.5 + dy });
+      });
+      let pick = cand[0];
+      for (const k of cand) {
+        const x1 = k.anchor === 'start' ? k.x : k.x - w;
+        const box = { x1, x2: x1 + w, y1: k.y - 9, y2: k.y + 3 };
+        if (!hit(box) && x1 > L - 4 && x1 + w < R + 24) { pick = k; break; }
+      }
+      const px1 = pick.anchor === 'start' ? pick.x : pick.x - w;
+      placed.push({ x1: px1, x2: px1 + w, y1: pick.y - 9, y2: pick.y + 3 });
+      kids.push(E('text', {
+        key: 't' + l.c.i, x: pick.x, y: pick.y, textAnchor: pick.anchor,
+        fill: l.isSel ? '#EDE9DF' : 'rgba(237,233,223,0.62)',
+        fontSize: 10, fontFamily: 'IBM Plex Mono, monospace', letterSpacing: '0.06em'
+      }, l.c.n));
+    });
+    return E('svg', { viewBox: '0 0 640 490', role: 'img', 'aria-label': 'Desire score against conversion residual, 40 markets', style: { width: '100%', height: 'auto', display: 'block' } }, kids);
+  }
+
+  listEl() {
+    const E = React.createElement;
+    const rows = [...this.rows()].sort((a, b) => a.res - b.res);
+    const mono = { fontFamily: 'IBM Plex Mono, monospace', fontSize: 12, letterSpacing: '0.06em', fontVariantNumeric: 'tabular-nums' };
+    const spark = c => {
+      const w = 40, mid = w / 2, dx = (c.res / 2.5) * mid;
+      return E('svg', { width: w, height: 14, viewBox: '0 0 40 14', style: { display: 'block' } },
+        E('line', { key: 1, x1: 0, y1: 7, x2: 40, y2: 7, stroke: 'rgba(237,233,223,0.2)', strokeWidth: 1 }),
+        E('line', { key: 2, x1: mid, y1: 1, x2: mid, y2: 13, stroke: 'rgba(237,233,223,0.55)', strokeWidth: 1 }),
+        E('rect', { key: 3, x: mid + Math.min(dx, 0), y: 5.5, width: Math.max(1.5, Math.abs(dx)), height: 3, fill: this.clsColor(c.cls) })
+      );
+    };
+    const head = E('div', { key: 'h', style: { display: 'grid', gridTemplateColumns: '1fr 64px 40px', gap: 12, alignItems: 'center', padding: '10px 0', borderBottom: '1px solid rgba(237,233,223,0.12)', color: 'rgba(237,233,223,0.55)', ...mono, fontSize: 11 } },
+      E('span', { key: 1 }, 'Market'), E('span', { key: 2, style: { textAlign: 'right' } }, 'vs exp.'), E('span', { key: 3 }, ''));
+    const body = rows.map(c => E('div', {
+      key: c.i, onClick: () => this.setState({ sel: this.state.sel === c.i ? null : c.i }),
+      style: { display: 'grid', gridTemplateColumns: '1fr 64px 40px', gap: 12, alignItems: 'center', padding: '14px 0', borderBottom: '1px solid rgba(237,233,223,0.12)', cursor: 'pointer', background: c.i === this.state.sel ? 'rgba(237,233,223,0.04)' : 'transparent' }
+    },
+      E('span', { key: 1, style: { fontFamily: 'Inter, sans-serif', fontSize: 15, color: '#EDE9DF' } }, c.n),
+      E('span', { key: 2, style: { ...mono, textAlign: 'right', color: this.clsColor(c.cls) } }, (c.res > 0 ? '+' : '−') + Math.abs(c.res).toFixed(1) + 'σ'),
+      E('span', { key: 3 }, spark(c))
+    ));
+    return E('div', null, head, body);
+  }
+
+  renderVals() {
+    const rows = this.rows(), c = this.state.sel == null ? null : rows[this.state.sel];
+    const fLevels = { 1: 'low', 2: 'moderate', 3: 'high friction', 4: 'severe' };
+    const layers = [
+      { num: '01', name: 'Intelligence', def: 'The nervous system: continuous measurement of desire, conversion and leakage across source markets.', link: 'Intelligence layer', href: 'Intelligence.dc.html', caps: ['Grand Tour Index instrumentation', 'Source-market demand modelling', 'Creator and sentiment density tracking', 'Competitive substitution analysis', 'Quarterly diagnostic reporting'] },
+      { num: '02', name: 'Governance', def: 'The mandate layer: the framework that lets a decision survive an election cycle.', link: 'Governance layer', href: 'Governance.dc.html', caps: ['National positioning frameworks', 'Institutional operating models', 'Budget allocation governance', 'Monitoring and evaluation systems', 'Stakeholder alignment protocols'] },
+      { num: '03', name: 'Desire', def: 'Positioning and brand: what the market wants before it knows it wants it.', link: 'Desire layer', href: 'Desire.dc.html', caps: ['Country and city positioning', 'Cultural relevance strategy', 'Identity and design systems', 'Portfolio architecture', 'Category redefinition'] },
+      { num: '04', name: 'Production', def: 'Narrative at global scale, produced to broadcast standard and to schedule.', link: 'Production layer', href: 'Production.dc.html', caps: ['Global campaign production', 'Cultural programming and events', 'Content systems and libraries', 'Rights, talent and partnerships', 'Localisation across source markets'] },
+      { num: '05', name: 'Growth', def: 'Demand systems: the conversion machinery between attention and arrival.', link: 'Growth layer', href: 'Growth.dc.html', caps: ['Performance and media allocation', 'Route and network demand', 'AI-assisted demand forecasting', 'Trade and channel activation', 'Conversion instrumentation'] }
+    ];
+    return {
+      mapLayer: this.mapLayerEl(),
+      plot: this.plotEl(),
+      list: this.listEl(),
+      countries: rows.map(r => ({ i: r.i, n: r.n })),
+      selIdx: this.state.sel == null ? '' : String(this.state.sel),
+      onSelect: e => this.setState({ sel: e.target.value === '' ? null : Number(e.target.value) }),
+      hasSel: !!c,
+      noSel: !c,
+      dist: this.classes.map(k => ({
+        label: k.label,
+        color: this.clsColor(k.key),
+        count: String(rows.filter(r => r.cls === k.key).length).padStart(2, '0')
+      })),
+      desireStr: c ? c.d.toFixed(1) : '',
+      resStr: c ? (c.res > 0 ? '+' : '−') + Math.abs(c.res).toFixed(1) + 'σ' : '',
+      resColor: c ? this.clsColor(c.cls) : 'rgba(237,233,223,0.55)',
+      classStr: c ? this.clsLabel(c.cls) : '',
+      rangeStr: c ? (c.hi < 0.05 ? 'Within expected range' : 'USD ' + c.lo.toFixed(1) + 'B – ' + c.hi.toFixed(1) + 'B') : '',
+      friction: c ? c.friction.map(f => ({
+        label: f[0],
+        level: fLevels[f[1]],
+        color: f[1] >= 3 ? this.leakage : 'rgba(237,233,223,0.6)',
+        blocks: [1, 2, 3, 4].map(n => ({ bg: n <= f[1] ? this.leakage : 'rgba(237,233,223,0.14)' }))
+      })) : [],
+      nav: [
+        { num: '01', name: 'Intelligence', href: 'Intelligence.dc.html', act: '', color: 'rgba(237,233,223,0.8)' },
+        { num: '02', name: 'Governance', href: 'Governance.dc.html', act: '', color: 'rgba(237,233,223,0.8)' },
+        { num: '03', name: 'Desire', href: 'Desire.dc.html', act: '', color: 'rgba(237,233,223,0.8)' },
+        { num: '04', name: 'Production', href: 'Production.dc.html', act: '', color: 'rgba(237,233,223,0.8)' },
+        { num: '05', name: 'Growth', href: 'Growth.dc.html', act: '', color: 'rgba(237,233,223,0.8)' }
+      ],
+      menuOpen: !!this.state.menu,
+      toggleMenu: () => this.setState({ menu: !this.state.menu }),
+      trackPct: Math.round((this.state.trackP || 0) * 100) + '%',
+      onRailDown: e => {
+        const rail = e.currentTarget, t = this.track;
+        if (!t) return;
+        const seek = ev => {
+          const r = rail.getBoundingClientRect();
+          const p = Math.max(0, Math.min(1, (ev.clientX - r.left) / r.width));
+          t.scrollLeft = p * (t.scrollWidth - t.clientWidth);
+        };
+        seek(e);
+        const up = () => { window.removeEventListener('pointermove', seek); window.removeEventListener('pointerup', up); };
+        window.addEventListener('pointermove', seek);
+        window.addEventListener('pointerup', up);
+      },
+      trackLabel: String(Math.min(6, Math.floor((this.state.trackP || 0) * 5) + 1)).padStart(2, '0') + ' / 06',
+      layers,
+      activeLayerLabel: layers[Math.min(this.state.active, 4)].num + ' · ' + layers[Math.min(this.state.active, 4)].name,
+      thesis: [
+        { num: '01 / Fashion houses', title: 'Seasons, not campaigns', body: 'A calendar of releases with an editorial point of view, and the discipline to retire what no longer signals status.' },
+        { num: '02 / Streaming platforms', title: 'Programmed demand', body: 'Slates, windows and retention curves. Attention is scheduled and measured, not bought once a year.' },
+        { num: '03 / Sports franchises', title: 'Rivalry and rosters', body: 'Fixtures create anticipation. Cities and countries have competitive sets and refuse to name them.' },
+        { num: '04 / Luxury brands', title: 'Scarcity as governance', body: 'Access is allocated. Volume is a policy instrument, not an aspiration. Price protects the asset.' },
+        { num: '05 / Technology ecosystems', title: 'Platform, not poster', body: 'A visitor economy is an interface: data, partners, developers, distribution. Infrastructure compounds.' },
+        { num: '06 / Cultural movements', title: 'Relevance beats reach', body: 'Magnetism is produced by the people already inside the market. It is a governance question before it is a media one.' }
+      ],
+      mandates: [
+        { num: 'M/01', type: 'Governance', name: 'Ministry of Tourism, Southern Europe', coord: '41.90° N · 12.50° E' },
+        { num: 'M/02', type: 'Demand', name: 'Gulf Aviation Group', coord: '25.27° N · 51.53° E' },
+        { num: 'M/03', type: 'Intelligence', name: 'Nordic Visitor Authority', coord: '64.15° N · 21.94° W' },
+        { num: 'M/04', type: 'Governance', name: 'Metropolitan Authority, East Africa', coord: '1.29° S · 36.82° E' },
+        { num: 'M/05', type: 'Allocation', name: 'Adriatic Regional Consortium', coord: '43.51° N · 16.44° E' },
+        { num: 'M/06', type: 'Desire', name: 'Pacific Hospitality Collective', coord: '1.35° N · 103.82° E' },
+        { num: 'M/07', type: 'Demand', name: 'Iberian Rail and Leisure', coord: '38.72° N · 9.14° W' },
+        { num: 'M/08', type: 'Allocation', name: 'Andean Trade Commission', coord: '4.71° N · 74.07° W' },
+        { num: 'M/09', type: 'Production', name: 'Department of Culture, Levant', coord: '31.95° N · 35.93° E' }
+      ],
+      records: [
+        { title: 'Reallocation of a national source-market portfolio', type: 'Governance · Intelligence', year: '2024', outcome: 'Conversion rank moved 11 positions against a flat media budget; dependence on two source markets reduced from 74% to 58%.' },
+        { title: 'Positioning framework for a capital city', type: 'Desire · Production', year: '2025', outcome: 'Adopted as statutory framework across four agencies; off-peak arrivals up 19% with no increase in peak volume.' }
+      ],
+      dispatchCta: this.state.sent ? 'Registered ↗' : 'Request access →',
+      onSubmit: e => { e.preventDefault(); this.setState({ sent: true }); },
+      sitemap: [
+        { head: 'Layers', items: ['Intelligence', 'Governance', 'Desire', 'Production', 'Growth'] },
+        { head: 'Instruments', items: ['The Grand Tour Index', 'Methodology', 'Dispatch', 'Diagnostic request'] },
+        { head: 'Company', items: ['Mandate', 'Rome', 'LoBueno', 'Stagwell', 'Careers', 'Contact'] }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

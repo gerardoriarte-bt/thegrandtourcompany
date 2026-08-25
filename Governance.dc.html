@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Governance — The Grand Tour Company</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:#0D0E0C;-webkit-font-smoothing:antialiased}
+a{color:#5E79E0;text-decoration:none}
+[data-parch] a{color:#1F3FD8}
+a:hover{color:#EDE9DF}
+:focus-visible{outline:1.5px solid #1F3FD8;outline-offset:4px}
+::selection{background:#1F3FD8;color:#EDE9DF}
+@keyframes tgtcRise{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+[data-k1],[data-k2]{opacity:0;animation:tgtcRise 800ms cubic-bezier(0.22,1,0.36,1) forwards}
+[data-k2]{animation-delay:600ms}
+@media (prefers-reduced-motion: reduce){
+ [data-k1],[data-k2]{opacity:1;animation:none}
+ html{scroll-behavior:auto}
+}
+@keyframes tgtcFade{from{opacity:0}to{opacity:1}}
+[data-fade]{animation:tgtcFade 250ms linear both}
+[data-navlink]::after{content:'';position:absolute;left:0;bottom:-6px;height:1px;width:0;background:currentColor;transition:width 200ms cubic-bezier(0.22,1,0.36,1)}
+[data-navlink]:hover::after{width:100%}
+[data-navlink][data-navactive="on"]::after{width:100%}
+[data-menubtn]{display:none}
+[data-rail]{display:none}
+[data-prevnext]{display:grid}
+@media (min-width:1200px){
+ [data-rail]{display:block}
+ [data-prevnext]{display:none}
+ [data-mainpad]{padding-left:120px}
+}
+@media (max-width:1120px){
+ [data-navcenter]{display:none!important}
+ [data-navutil]{display:none!important}
+ [data-menubtn]{display:block!important}
+}
+@media (max-width:1200px){
+ [data-band]{grid-template-columns:minmax(0,1fr)!important;gap:8px!important}
+ [data-band] [data-bandtext]{padding-left:2px}
+}
+@media (max-width:900px){
+ [data-split]{grid-template-columns:1fr!important;gap:48px!important}
+ [data-cap]{grid-template-columns:1fr!important;gap:16px!important}
+ [data-cap]>*+*{border-left:none!important;padding-left:0!important}
+ [data-phases]{grid-template-columns:1fr!important}
+ [data-phases]>*{border-left:none!important;border-top:1px solid rgba(13,14,12,0.14);padding-left:0!important;padding-top:20px!important}
+ [data-band]{grid-template-columns:1fr!important;gap:8px!important}
+ [data-band] [data-bandtext]{font-size:10px!important}
+}
+
+@media (max-width:640px){
+ [data-arg]{overflow-x:auto;-webkit-overflow-scrolling:touch;padding-bottom:8px}
+ [data-arg] div:has(> svg){min-width:600px}
+ [data-matrix]{min-width:560px}
+ [data-plotwrap]{overflow-x:auto}
+ [data-traj]{grid-template-columns:1fr 1fr!important}
+}
+@media (max-width:560px){
+ [data-brand]{max-width:62vw}
+ [data-desc]{white-space:normal;line-height:1.35}
+ [data-logogrid]{grid-template-columns:1fr!important}
+ [data-doors]{grid-template-columns:1fr!important}
+}
+</style>
+</helmet>
+
+{{ mapLayer }}
+
+<header style="position:fixed;top:0;left:0;right:0;z-index:20;height:64px;background:rgba(13,14,12,0.92);border-bottom:1px solid rgba(237,233,223,0.12)">
+  <div style="max-width:1440px;margin:0 auto;height:100%;padding:0 clamp(24px,5.5vw,80px);display:flex;align-items:center;justify-content:space-between;gap:40px">
+    <a data-brand href="TGTC Website.dc.html" style="display:block;color:#EDE9DF;flex:0 0 auto">
+      <span style="display:block;font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.08em">THE GRAND TOUR COMPANY</span>
+      <span data-desc style="display:block;margin-top:3px;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.06em;color:rgba(237,233,223,0.5)">Marketing infrastructure for tourism economies.</span>
+    </a>
+    <nav data-navcenter aria-label="Layers" style="display:flex;gap:32px;align-items:center">
+      <sc-for list="{{ nav }}" as="n" hint-placeholder-count="5">
+        <a data-navlink data-navactive="{{ n.act }}" href="{{ n.href }}" style="position:relative;font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.06em;color:{{ n.color }}">{{ n.name }}</a>
+      </sc-for>
+    </nav>
+    <div data-navutil style="display:flex;gap:24px;align-items:center;font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.06em;flex:0 0 auto">
+      <a href="Index.dc.html" style="color:#5E79E0">Index</a>
+      <a href="TGTC Website.dc.html#dispatch" style="color:rgba(237,233,223,0.8)">Contact</a>
+    </div>
+    <button data-menubtn type="button" onClick="{{ toggleMenu }}" style="background:transparent;border:0;color:#EDE9DF;font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.06em;cursor:pointer;padding:0">Menu</button>
+  </div>
+</header>
+
+<sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}">
+  <div data-fade style="position:fixed;inset:0;z-index:30;background:#0D0E0C;padding:20px clamp(24px,5.5vw,80px) 40px;display:flex;flex-direction:column;color:#EDE9DF;font-family:Inter,sans-serif;overflow-y:auto">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:24px;height:44px">
+      <span style="font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.08em">THE GRAND TOUR COMPANY</span>
+      <button type="button" onClick="{{ toggleMenu }}" style="background:transparent;border:0;color:#EDE9DF;font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.06em;cursor:pointer;padding:0">Close</button>
+    </div>
+    <div style="margin-top:32px;border-top:1px solid rgba(237,233,223,0.12)">
+      <sc-for list="{{ nav }}" as="n" hint-placeholder-count="5">
+        <a href="{{ n.href }}" onClick="{{ toggleMenu }}" style="display:flex;align-items:baseline;gap:20px;padding:20px 0;border-bottom:1px solid rgba(237,233,223,0.12);color:{{ n.color }}">
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.06em;color:rgba(237,233,223,0.55);font-variant-numeric:tabular-nums">{{ n.num }}</span>
+          <span style="font-size:20px;line-height:1.3">{{ n.name }}</span>
+        </a>
+      </sc-for>
+      <a href="Index.dc.html" onClick="{{ toggleMenu }}" style="display:block;padding:20px 0;border-bottom:1px solid rgba(237,233,223,0.12);font-family:'IBM Plex Mono',monospace;font-size:13px;letter-spacing:0.06em;color:#5E79E0">Index</a>
+      <a href="TGTC Website.dc.html#dispatch" onClick="{{ toggleMenu }}" style="display:block;padding:20px 0;border-bottom:1px solid rgba(237,233,223,0.12);font-family:'IBM Plex Mono',monospace;font-size:13px;letter-spacing:0.06em;color:rgba(237,233,223,0.8)">Contact</a>
+    </div>
+  </div>
+</sc-if>
+
+<nav data-rail aria-label="Stack" style="position:fixed;left:clamp(16px,2.5vw,40px);top:50%;transform:translateY(-50%);z-index:15;width:120px">
+  <sc-for list="{{ nav }}" as="n" hint-placeholder-count="5">
+    <a href="{{ n.href }}" style="display:block;padding:10px 0 10px 12px;border-left:{{ n.rail }};font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.06em;color:{{ n.railColor }};font-variant-numeric:tabular-nums">{{ n.num }}  {{ n.name }}</a>
+  </sc-for>
+</nav>
+
+<div data-mainpad style="position:relative;z-index:1;padding-top:64px;color:#EDE9DF;font-family:Inter,system-ui,sans-serif;font-weight:400;overflow-x:clip">
+
+<div style="border-bottom:1px solid rgba(237,233,223,0.12)">
+  <div style="max-width:1440px;margin:0 auto;padding:14px clamp(24px,5.5vw,80px);font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.06em;color:rgba(237,233,223,0.55)">
+    <a href="TGTC Website.dc.html" style="color:rgba(237,233,223,0.7)">Home</a> / Layer 02 — Governance
+  </div>
+</div>
+
+<!-- 01 CHAPTER OPENER -->
+<section id="top" style="min-height:70vh;display:flex;flex-direction:column;justify-content:center;padding:clamp(80px,10vw,128px) 0;scroll-margin-top:64px">
+  <div style="max-width:1440px;margin:0 auto;width:100%;padding:0 clamp(24px,5.5vw,80px)">
+    <p data-k1 style="margin:0 0 48px;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.06em;color:rgba(237,233,223,0.55)">Layer 02 — Governance</p>
+    <h1 data-k1 style="margin:0;font-family:'Instrument Serif',serif;font-weight:400;font-size:clamp(48px,7vw,92px);line-height:1.05;letter-spacing:-0.02em;max-width:18em">Marketing cannot fix what legislation causes.</h1>
+    <p data-k2 style="margin:48px 0 0;font-size:18px;line-height:1.65;max-width:60ch;color:rgba(237,233,223,0.72)">Tourism growth is shaped by visa regimes, concession law, air service agreements, land use, environmental permitting and institutional coordination. TGTC operates at that layer.</p>
+  </div>
+</section>
+
+<!-- 02 THE CEILING -->
+<section data-parch style="background:#EDE9DF;color:#0D0E0C;padding:clamp(96px,12vw,160px) 0;border-top:1px solid rgba(13,14,12,0.14)">
+  <div style="max-width:1440px;margin:0 auto;padding:0 clamp(24px,5.5vw,80px)">
+    <div data-split style="display:grid;grid-template-columns:minmax(0,8fr) minmax(0,4fr);gap:64px;align-items:end">
+      <div data-ceiling style="min-width:0;display:flex;flex-direction:column;gap:10px">
+        <sc-for list="{{ bands }}" as="b" hint-placeholder-count="4">
+          <div data-band style="display:grid;grid-template-columns:minmax(0,1fr) minmax(120px,220px);gap:20px;align-items:center">
+            <div style="min-width:0;position:relative;height:88px;width:{{ b.w }}">
+              <div style="position:absolute;inset:0;border:1px solid rgba(13,14,12,0.28);transform:{{ b.t }};transform-origin:left center;transition:transform 600ms cubic-bezier(0.22,1,0.36,1);transition-delay:{{ b.delay }}"></div>
+              <div style="position:relative;height:88px;display:flex;align-items:center;padding:0 14px;opacity:{{ b.o }};transition:opacity 400ms cubic-bezier(0.22,1,0.36,1);transition-delay:{{ b.delay }}">
+                <span style="font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:500;letter-spacing:0.06em;white-space:nowrap">{{ b.name }}</span>
+              </div>
+            </div>
+            <span data-bandtext style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.06em;color:rgba(13,14,12,0.6);line-height:1.6">{{ b.note }}</span>
+          </div>
+        </sc-for>
+        <p style="margin:14px 0 0;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.06em;color:rgba(13,14,12,0.62)">Each layer is capped by the layer beneath it.</p>
+      </div>
+      <div style="min-width:0;padding-bottom:24px">
+        <p style="margin:0;font-family:'Instrument Serif',serif;font-size:clamp(32px,4vw,56px);line-height:1.05;letter-spacing:-0.02em">You cannot market past your own ceiling.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 03 FOUR FAILURES -->
+<section style="padding:clamp(96px,12vw,160px) 0;border-top:1px solid rgba(237,233,223,0.12)">
+  <div style="max-width:1440px;margin:0 auto;padding:0 clamp(24px,5.5vw,80px)">
+    <p style="margin:0 0 64px;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.06em;color:rgba(237,233,223,0.5)">03 — Four regulatory failures</p>
+    <sc-for list="{{ failures }}" as="f" hint-placeholder-count="4">
+      <div data-reveal data-split style="display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:64px;padding:44px 0;border-top:1px solid rgba(237,233,223,0.12);align-items:start">
+        <div>
+          <p style="margin:0 0 16px;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.06em;color:rgba(237,233,223,0.55);font-variant-numeric:tabular-nums">{{ f.num }}</p>
+          <h3 style="margin:0;font-family:'Instrument Serif',serif;font-weight:400;font-size:clamp(28px,3.2vw,44px);line-height:1.08;letter-spacing:-0.02em">{{ f.title }}</h3>
+        </div>
+        <div style="display:grid;gap:12px;font-size:17px;line-height:1.65;color:rgba(237,233,223,0.72);max-width:52ch">
+          <p style="margin:0">{{ f.l1 }}</p>
+          <p style="margin:0">{{ f.l2 }}</p>
+          <p style="margin:0;color:rgba(237,233,223,0.55)">{{ f.l3 }}</p>
+        </div>
+      </div>
+    </sc-for>
+    <div style="border-top:1px solid rgba(237,233,223,0.12)"></div>
+  </div>
+</section>
+
+<!-- 04 THE INSTRUMENT -->
+<section data-parch style="background:#EDE9DF;color:#0D0E0C;padding:clamp(96px,12vw,160px) 0;border-top:1px solid rgba(13,14,12,0.14)">
+  <div style="max-width:1440px;margin:0 auto;padding:0 clamp(24px,5.5vw,80px)">
+    <p style="margin:0 0 48px;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.06em;color:rgba(13,14,12,0.62)">04 — The instrument</p>
+    <div data-split style="display:grid;grid-template-columns:minmax(0,6fr) minmax(0,6fr);gap:64px;align-items:start">
+      <div>
+        <h2 style="margin:0;font-family:'Instrument Serif',serif;font-weight:400;font-size:clamp(30px,3.6vw,50px);line-height:1.06;letter-spacing:-0.02em;max-width:22em">A negative conversion gap almost always resolves into one of those four failures.</h2>
+        <p style="margin:24px 0 0;font-size:17px;line-height:1.65;color:rgba(13,14,12,0.7);max-width:52ch">Every governance mandate opens with this measurement, not with a workshop. The friction diagnostic assigns the gap recorded in the Grand Tour Index to the regime that produces it, so the first decision is about instruments rather than intent.</p>
+        <p style="margin:24px 0 0;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.06em"><a href="TGTC Website.dc.html">Open the Grand Tour Index →</a></p>
+      </div>
+      <div style="border-top:1px solid rgba(13,14,12,0.28);padding-top:24px">
+        <div style="display:flex;justify-content:space-between;gap:16px;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.06em;color:rgba(13,14,12,0.62);font-variant-numeric:tabular-nums">
+          <span>Friction diagnostic — sample market</span><span>Gap −1.4σ</span>
+        </div>
+        <div style="margin-top:24px">
+          <sc-for list="{{ friction }}" as="f" hint-placeholder-count="4">
+            <div style="display:grid;grid-template-columns:1fr auto auto;gap:16px;align-items:center;padding:13px 0;border-bottom:1px solid rgba(13,14,12,0.14);font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.06em">
+              <span>{{ f.label }}</span>
+              <span style="display:flex;gap:3px">
+                <sc-for list="{{ f.blocks }}" as="b" hint-placeholder-count="4">
+                  <span style="width:16px;height:9px;display:block;background:{{ b.bg }}"></span>
+                </sc-for>
+              </span>
+              <span style="min-width:96px;text-align:right;color:{{ f.color }}">{{ f.level }}</span>
+            </div>
+          </sc-for>
+        </div>
+        <p style="margin:16px 0 0;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.06em;color:rgba(13,14,12,0.62);line-height:1.7">v1 sample data. Static readout; the live instrument is on the Index.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 05 WHAT WE DO -->
+<section style="padding:clamp(96px,12vw,160px) 0;border-top:1px solid rgba(237,233,223,0.12)">
+  <div style="max-width:1440px;margin:0 auto;padding:0 clamp(24px,5.5vw,80px)">
+    <p style="margin:0 0 48px;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.06em;color:rgba(237,233,223,0.5)">05 — Instruments in use</p>
+    <div style="border-top:1px solid rgba(237,233,223,0.12)">
+      <sc-for list="{{ capabilities }}" as="c" hint-placeholder-count="10">
+        <div data-cap style="display:grid;grid-template-columns:minmax(0,4fr) minmax(0,8fr);gap:48px;padding:26px 0;border-bottom:1px solid rgba(237,233,223,0.12);align-items:baseline">
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:13px;letter-spacing:0.06em;color:#EDE9DF">{{ c.label }}</span>
+          <span style="font-size:16px;line-height:1.65;color:rgba(237,233,223,0.68);padding-left:0">{{ c.desc }}</span>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+</section>
+
+<!-- 06 MANDATE SHAPE -->
+<section data-parch style="background:#EDE9DF;color:#0D0E0C;padding:clamp(96px,12vw,160px) 0;border-top:1px solid rgba(13,14,12,0.14)">
+  <div style="max-width:1440px;margin:0 auto;padding:0 clamp(24px,5.5vw,80px)">
+    <p style="margin:0 0 48px;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.06em;color:rgba(13,14,12,0.62)">06 — Mandate shape</p>
+    <div data-phases style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-top:1px solid rgba(13,14,12,0.28)">
+      <sc-for list="{{ phases }}" as="p" hint-placeholder-count="4">
+        <div style="padding:28px 32px 0 0;border-left:1px solid rgba(13,14,12,0.14);padding-left:24px">
+          <p style="margin:0 0 10px;font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:500;letter-spacing:0.06em">{{ p.name }}</p>
+          <p style="margin:0 0 20px;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.06em;color:#1F3FD8;font-variant-numeric:tabular-nums">{{ p.dur }}</p>
+          <p style="margin:0;font-size:15px;line-height:1.6;color:rgba(13,14,12,0.7)">{{ p.scope }}</p>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+</section>
+
+<!-- 07 CROSS-LINKS -->
+<section style="padding:clamp(80px,9vw,120px) 0;border-top:1px solid rgba(237,233,223,0.12)">
+  <div style="max-width:1440px;margin:0 auto;padding:0 clamp(24px,5.5vw,80px)">
+    <p style="margin:0 0 32px;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.06em;color:rgba(237,233,223,0.5)">07 — Adjacent layers</p>
+    <div style="border-top:1px solid rgba(237,233,223,0.12)">
+      <sc-for list="{{ links }}" as="l" hint-placeholder-count="3">
+        <a href="TGTC Website.dc.html" data-cap style="display:grid;grid-template-columns:minmax(0,3fr) minmax(0,8fr) auto;gap:32px;align-items:baseline;padding:24px 0;border-bottom:1px solid rgba(237,233,223,0.12);font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.06em;color:#EDE9DF">
+          <span>{{ l.name }}</span>
+          <span style="color:rgba(237,233,223,0.6)">{{ l.rel }}</span>
+          <span style="color:#5E79E0">→</span>
+        </a>
+      </sc-for>
+    </div>
+  </div>
+</section>
+
+<nav data-prevnext aria-label="Adjacent layers" style="max-width:1440px;margin:0 auto;padding:0 clamp(24px,5.5vw,80px);grid-template-columns:1fr 1fr;border-top:1px solid rgba(237,233,223,0.12)">
+  <a href="TGTC Website.dc.html#stack" style="padding:24px 24px 24px 0;font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.06em;color:#EDE9DF">← 01 Intelligence</a>
+  <a href="TGTC Website.dc.html#stack" style="padding:24px 0;text-align:right;border-left:1px solid rgba(237,233,223,0.12);font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.06em;color:#EDE9DF">03 Desire →</a>
+</nav>
+
+<!-- 08 CONTACT -->
+<section style="padding:clamp(64px,7vw,96px) 0 64px;border-top:1px solid rgba(237,233,223,0.12)">
+  <div style="max-width:1440px;margin:0 auto;padding:0 clamp(24px,5.5vw,80px);display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.06em;color:rgba(237,233,223,0.6)">
+      <span>Governance mandates are scoped directly with the institution. <a href="TGTC Website.dc.html#public">Request a governance diagnostic →</a></span>
+      <span style="color:rgba(237,233,223,0.55);font-variant-numeric:tabular-nums">Rome · 41.9028° N, 12.4964° E</span>
+  </div>
+</section>
+
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;signal&quot;:{&quot;editor&quot;:&quot;color&quot;,&quot;default&quot;:&quot;#1F3FD8&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;options&quot;:[&quot;#1F3FD8&quot;,&quot;#2B4FE0&quot;,&quot;#3A55A8&quot;],&quot;section&quot;:&quot;Color&quot;},&quot;leakage&quot;:{&quot;editor&quot;:&quot;color&quot;,&quot;default&quot;:&quot;#B23A2F&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;options&quot;:[&quot;#B23A2F&quot;,&quot;#8F2F27&quot;,&quot;#C0463A&quot;],&quot;section&quot;:&quot;Color&quot;},&quot;staticBands&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Motion&quot;}}">
+class Component extends DCLogic {
+  state = { ceil: false };
+
+  outline = [
+    [7.5,44.0],[8.9,45.6],[10.2,46.4],[12.4,46.6],[13.6,45.8],[13.1,44.6],[14.6,42.6],[15.4,42.0],
+    [16.2,41.8],[18.5,40.2],[17.9,39.9],[17.2,38.9],[16.1,38.0],[15.6,38.2],[15.9,40.0],[14.4,40.4],
+    [13.0,41.0],[11.2,42.4],[10.2,43.5],[9.9,44.1],[8.2,44.2]
+  ];
+
+  divisions = [
+    [[7.0,45.1],[13.9,45.1]],[[9.4,43.6],[15.2,43.6]],[[12.6,41.4],[18.9,41.4]],
+    [[9.6,46.9],[9.6,43.6]],[[12.6,47.0],[12.6,41.4]],[[15.4,42.6],[15.4,38.0]]
+  ];
+
+  componentDidMount() {
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduce || this.props.staticBands) { this.setState({ ceil: true }); }
+    else {
+      const c = document.querySelector('[data-ceiling]');
+      if (c) {
+        const io = new IntersectionObserver(es => es.forEach(e => {
+          if (e.isIntersecting) { this.setState({ ceil: true }); io.disconnect(); }
+        }), { threshold: 0.25 });
+        io.observe(c);
+        this._ceilTimer = setTimeout(() => this.setState({ ceil: true }), 4000);
+      } else this.setState({ ceil: true });
+    }
+    if (!reduce) {
+      const io2 = new IntersectionObserver(es => es.forEach(e => {
+        if (e.isIntersecting) { e.target.style.opacity = 1; e.target.style.transform = 'none'; io2.unobserve(e.target); }
+      }), { threshold: 0.1 });
+      document.querySelectorAll('[data-reveal]').forEach(el => {
+        el.style.opacity = 0; el.style.transform = 'translateY(12px)';
+        el.style.transition = 'opacity 700ms cubic-bezier(0.22,1,0.36,1), transform 700ms cubic-bezier(0.22,1,0.36,1)';
+        io2.observe(el);
+      });
+    }
+  }
+
+  get signal() { return this.props.signal || '#1F3FD8'; }
+  get leakage() { return this.props.leakage || '#B23A2F'; }
+  get signalText() { return '#5E79E0'; }
+  get leakageText() { return '#CE5A4D'; }
+
+  mapLayerEl() {
+    const E = React.createElement;
+    const lon0 = 6.2, lon1 = 19.4, lat0 = 47.4, lat1 = 37.4;
+    const W = 520, H = 760;
+    const X = l => ((l - lon0) / (lon1 - lon0)) * W;
+    const Y = l => ((lat0 - l) / (lat0 - lat1)) * H;
+    const ink = 'rgba(237,233,223,';
+    const d = this.outline.map((p, i) => (i ? 'L' : 'M') + X(p[0]).toFixed(1) + ' ' + Y(p[1]).toFixed(1)).join(' ') + ' Z';
+    const kids = [E('defs', { key: 'df' }, E('clipPath', { id: 'tgtcCountry' }, E('path', { d })))];
+
+    for (let lon = 6; lon <= 20; lon += 2) {
+      kids.push(E('line', { key: 'gv' + lon, x1: X(lon), y1: 0, x2: X(lon), y2: H, stroke: ink + '0.18)', strokeWidth: 0.5 }));
+    }
+    for (let lat = 47; lat >= 37; lat -= 2) {
+      kids.push(E('line', { key: 'gh' + lat, x1: 0, y1: Y(lat), x2: W, y2: Y(lat), stroke: ink + '0.18)', strokeWidth: 0.5 }));
+    }
+    kids.push(E('g', { key: 'div', clipPath: 'url(#tgtcCountry)' },
+      this.divisions.map((s, i) => E('line', {
+        key: i, x1: X(s[0][0]), y1: Y(s[0][1]), x2: X(s[1][0]), y2: Y(s[1][1]),
+        stroke: ink + '0.55)', strokeWidth: 0.6
+      }))
+    ));
+    kids.push(E('path', { key: 'out', d, fill: 'none', stroke: ink + '0.9)', strokeWidth: 1 }));
+
+    return E('div', {
+      'aria-hidden': 'true',
+      style: {
+        position: 'fixed', inset: 0, zIndex: 0, pointerEvents: 'none', opacity: 0.11,
+        display: 'flex', alignItems: 'center', justifyContent: 'flex-end',
+        paddingRight: '6vw'
+      }
+    }, E('svg', { viewBox: '0 0 ' + W + ' ' + H, preserveAspectRatio: 'xMidYMid meet', style: { height: '96vh', width: 'auto' } }, kids));
+  }
+
+  renderVals() {
+    const on = this.state.ceil;
+    const fr = [
+      ['Visa regime', 3], ['Air connectivity', 2], ['Institutional mandate', 4], ['Carrying capacity', 2]
+    ];
+    const levels = { 1: 'low', 2: 'moderate', 3: 'high friction', 4: 'severe' };
+    const layerNames = ['Intelligence', 'Governance', 'Desire', 'Production', 'Growth'];
+    return {
+      nav: layerNames.map((name, i) => {
+        const active = i === 1;
+        return {
+          num: '0' + (i + 1), name,
+          href: active ? '#top' : ['Intelligence.dc.html', 'Governance.dc.html', 'Desire.dc.html', 'Production.dc.html', 'Growth.dc.html'][i],
+          act: active ? 'on' : '',
+          color: active ? this.signalText : 'rgba(237,233,223,0.8)',
+          rail: active ? '2px solid ' + this.signal : '2px solid transparent',
+          railColor: active ? this.signalText : 'rgba(237,233,223,0.5)'
+        };
+      }),
+      menuOpen: !!this.state.menu,
+      toggleMenu: () => this.setState({ menu: !this.state.menu }),
+      mapLayer: this.mapLayerEl(),
+      bands: [
+        { name: 'Marketing', note: 'Addresses only the demand the layers below permit', w: '42%', t: on ? 'scaleX(1)' : 'scaleX(0)', o: on ? '1' : '0', delay: '1800ms' },
+        { name: 'Infrastructure', note: 'Converts mandate into capacity', w: '62%', t: on ? 'scaleX(1)' : 'scaleX(0)', o: on ? '1' : '0', delay: '1200ms' },
+        { name: 'Governance', note: 'Determines whether the limit is used', w: '80%', t: on ? 'scaleX(1)' : 'scaleX(0)', o: on ? '1' : '0', delay: '600ms' },
+        { name: 'Legislation', note: 'Sets the outer limit of everything above it', w: '100%', t: on ? 'scaleX(1)' : 'scaleX(0)', o: on ? '1' : '0', delay: '0ms' }
+      ],
+      failures: [
+        { num: '01', title: 'Visa friction', l1: 'Consular application requirements suppress arrivals even where demand is high.', l2: 'Cost and process, not just eligibility: appointment scarcity, documentary burden and refusal risk price out the traveller before any campaign reaches them.', l3: 'Measured as a conversion loss against source-market intent.' },
+        { num: '02', title: 'Uncoordinated air policy', l1: 'Bilateral air service agreements negotiated without reference to tourism strategy cap capacity independent of demand.', l2: 'Slot allocation, fifth-freedom rights and route subsidy sit with transport authorities that hold no visitor economy mandate.', l3: 'The ceiling is contractual, and it is renegotiated on a different calendar.' },
+        { num: '03', title: 'Absent destination mandate', l1: 'No single institution holds authority over the visitor economy.', l2: 'Responsibility is split across ministries with competing incentives: culture protects, transport moves, finance allocates, and no one owns conversion.', l3: 'Coordination is then attempted at the campaign layer, where it cannot work.' },
+        { num: '04', title: 'Unpriced externalities', l1: 'Growth without carrying-capacity policy produces resident opposition, then restriction, then decline.', l2: 'Congestion, housing displacement and infrastructure load arrive before the fiscal return does, and the political response is a cap rather than a plan.', l3: 'The sequence is predictable, which is what makes it a governance failure.' }
+      ],
+      friction: fr.map(f => ({
+        label: f[0], level: levels[f[1]],
+        color: f[1] >= 3 ? this.leakage : 'rgba(13,14,12,0.6)',
+        blocks: [1, 2, 3, 4].map(n => ({ bg: n <= f[1] ? this.leakage : 'rgba(13,14,12,0.14)' }))
+      })),
+      capabilities: [
+        { label: 'Policy design and evaluation', desc: 'Instrument selection, drafting support and ex-ante appraisal of measures that move arrivals, spend or dispersal.' },
+        { label: 'Legal framework development', desc: 'Concession, licensing and classification regimes written so they can be administered by the institution that inherits them.' },
+        { label: 'Tourism development plans', desc: 'Multi-year plans with allocation logic, sequencing and a defensible baseline.' },
+        { label: 'Public-private coordination systems', desc: 'Standing mechanisms for operators, carriers and authorities to decide together rather than consult separately.' },
+        { label: 'Institutional stakeholder engagement', desc: 'Mandate mapping across ministries, regions and agencies, with the conflicts named.' },
+        { label: 'International cooperation frameworks', desc: 'Bilateral and regional instruments covering connectivity, visa facilitation and joint positioning.' },
+        { label: 'Destination assessments', desc: 'Diagnostic of the governance layer against the conversion gap recorded in the Index.' },
+        { label: 'Carrying capacity frameworks', desc: 'Thresholds, pricing instruments and resilience provisions set before restriction becomes the only option.' },
+        { label: 'Monitoring, evaluation and learning', desc: 'MEL systems that survive a change of administration and report on the ministry cycle.' },
+        { label: 'Impact measurement and indicators', desc: 'Indicator design and attribution that hold up in a budget hearing.' }
+      ],
+      phases: [
+        { name: 'Diagnostic', dur: '6–10 weeks', scope: 'Governance and friction assessment against the Index baseline. Ends with a written finding, not a presentation.' },
+        { name: 'Framework', dur: '3–6 months', scope: 'Instrument design, legal drafting support and the allocation model the plan will be governed by.' },
+        { name: 'Implementation', dur: '12–36 months', scope: 'Standing coordination, capability transfer inside the institution, and sequencing against the budget cycle.' },
+        { name: 'Measurement', dur: 'ongoing', scope: 'MEL operation and quarterly reporting into the Index, with indicators fixed at framework stage.' }
+      ],
+      links: [
+        { name: 'Layer 01 — Intelligence', rel: 'Supplies the baseline this layer is measured against.' },
+        { name: 'Layer 03 — Desire', rel: 'Positions the destination inside the limits governance sets.' },
+        { name: 'Layer 05 — Growth', rel: 'Converts the permitted capacity into demand.' }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

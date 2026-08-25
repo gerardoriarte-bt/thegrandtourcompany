@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Desire — The Grand Tour Company</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:#0D0E0C;-webkit-font-smoothing:antialiased}
+a{color:#5E79E0;text-decoration:none}
+[data-parch] a{color:#1F3FD8}
+a:hover{color:#EDE9DF}
+:focus-visible{outline:1.5px solid #1F3FD8;outline-offset:4px}
+::selection{background:#1F3FD8;color:#EDE9DF}
+@keyframes tgtcRise{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+@keyframes tgtcFade{from{opacity:0}to{opacity:1}}
+[data-fade]{animation:tgtcFade 250ms linear both}
+[data-k1],[data-k2]{opacity:0;animation:tgtcRise 800ms cubic-bezier(0.22,1,0.36,1) forwards}
+[data-k2]{animation-delay:600ms}
+[data-navlink]::after{content:'';position:absolute;left:0;bottom:-6px;height:1px;width:0;background:currentColor;transition:width 200ms cubic-bezier(0.22,1,0.36,1)}
+[data-navlink]:hover::after{width:100%}
+[data-navlink][data-navactive="on"]::after{width:100%}
+[data-menubtn]{display:none}
+[data-rail]{display:none}
+[data-prevnext]{display:grid}
+@media (min-width:1200px){
+ [data-rail]{display:block}
+ [data-prevnext]{display:none}
+ [data-mainpad]{padding-left:120px}
+}
+@media (max-width:1120px){
+ [data-navcenter]{display:none!important}
+ [data-navutil]{display:none!important}
+ [data-menubtn]{display:block!important}
+}
+@media (prefers-reduced-motion: reduce){
+ [data-k1],[data-k2]{opacity:1;animation:none}
+ html{scroll-behavior:auto}
+}
+@media (max-width:900px){
+ [data-split]{grid-template-columns:1fr!important;gap:48px!important}
+ [data-cap]{grid-template-columns:1fr!important;gap:12px!important}
+ [data-phases]{grid-template-columns:1fr!important}
+ [data-phases]>*{border-left:none!important;border-top:1px solid rgba(13,14,12,0.14);padding-left:0!important;padding-top:20px!important}
+}
+
+@media (max-width:640px){
+ [data-arg]{overflow-x:auto;-webkit-overflow-scrolling:touch;padding-bottom:8px}
+ [data-arg] div:has(> svg){min-width:600px}
+ [data-matrix]{min-width:560px}
+ [data-plotwrap]{overflow-x:auto}
+ [data-traj]{grid-template-columns:1fr 1fr!important}
+}
+@media (max-width:560px){
+ [data-brand]{max-width:62vw}
+ [data-desc]{white-space:normal;line-height:1.35}
+ [data-logogrid]{grid-template-columns:1fr!important}
+ [data-doors]{grid-template-columns:1fr!important}
+}
+</style>
+</helmet>
+
+{{ mapLayer }}
+
+<header style="position:fixed;top:0;left:0;right:0;z-index:20;height:64px;background:rgba(13,14,12,0.92);border-bottom:1px solid rgba(237,233,223,0.12)">
+  <div style="max-width:1440px;margin:0 auto;height:100%;padding:0 clamp(24px,5.5vw,80px);display:flex;align-items:center;justify-content:space-between;gap:40px">
+    <a data-brand href="TGTC Website.dc.html" style="display:block;color:#EDE9DF;flex:0 0 auto">
+      <span style="display:block;font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.08em">THE GRAND TOUR COMPANY</span>
+      <span data-desc style="display:block;margin-top:3px;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.06em;color:rgba(237,233,223,0.5)">Marketing infrastructure for tourism economies.</span>
+    </a>
+    <nav data-navcenter aria-label="Layers" style="display:flex;gap:32px;align-items:center">
+      <sc-for list="{{ nav }}" as="n" hint-placeholder-count="5">
+        <a data-navlink data-navactive="{{ n.act }}" href="{{ n.href }}" style="position:relative;font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.06em;color:{{ n.color }}">{{ n.name }}</a>
+      </sc-for>
+    </nav>
+    <div data-navutil style="display:flex;gap:24px;align-items:center;font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.06em;flex:0 0 auto">
+      <a href="Index.dc.html" style="color:#5E79E0">Index</a>
+      <a href="TGTC Website.dc.html#dispatch" style="color:rgba(237,233,223,0.8)">Contact</a>
+    </div>
+    <button data-menubtn type="button" onClick="{{ toggleMenu }}" style="background:transparent;border:0;color:#EDE9DF;font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.06em;cursor:pointer;padding:0">Menu</button>
+  </div>
+</header>
+
+<sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}">
+  <div data-fade style="position:fixed;inset:0;z-index:30;background:#0D0E0C;padding:20px clamp(24px,5.5vw,80px) 40px;display:flex;flex-direction:column;color:#EDE9DF;font-family:Inter,sans-serif;overflow-y:auto">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:24px;height:44px">
+      <span style="font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.08em">THE GRAND TOUR COMPANY</span>
+      <button type="button" onClick="{{ toggleMenu }}" style="background:transparent;border:0;color:#EDE9DF;font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.06em;cursor:pointer;padding:0">Close</button>
+    </div>
+    <div style="margin-top:32px;border-top:1px solid rgba(237,233,223,0.12)">
+      <sc-for list="{{ nav }}" as="n" hint-placeholder-count="5">
+        <a href="{{ n.href }}" onClick="{{ toggleMenu }}" style="display:flex;align-items:baseline;gap:20px;padding:20px 0;border-bottom:1px solid rgba(237,233,223,0.12);color:{{ n.color }}">
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.06em;color:rgba(237,233,223,0.55);font-variant-numeric:tabular-nums">{{ n.num }}</span>
+          <span style="font-size:20px;line-height:1.3">{{ n.name }}</span>
+        </a>
+      </sc-for>
+      <a href="Index.dc.html" onClick="{{ toggleMenu }}" style="display:block;padding:20px 0;border-bottom:1px solid rgba(237,233,223,0.12);font-family:'IBM Plex Mono',monospace;font-size:13px;letter-spacing:0.06em;color:#5E79E0">Index</a>
+      <a href="TGTC Website.dc.html#dispatch" onClick="{{ toggleMenu }}" style="display:block;padding:20px 0;border-bottom:1px solid rgba(237,233,223,0.12);font-family:'IBM Plex Mono',monospace;font-size:13px;letter-spacing:0.06em;color:rgba(237,233,223,0.8)">Contact</a>
+    </div>
+  </div>
+</sc-if>
+
+<nav data-rail aria-label="Stack" style="position:fixed;left:clamp(16px,2.5vw,40px);top:50%;transform:translateY(-50%);z-index:15;width:120px">
+  <sc-for list="{{ nav }}" as="n" hint-placeholder-count="5">
+    <a href="{{ n.href }}" style="display:block;padding:10px 0 10px 12px;border-left:{{ n.rail }};font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.06em;color:{{ n.railColor }};font-variant-numeric:tabular-nums">{{ n.num }}  {{ n.name }}</a>
+  </sc-for>
+</nav>
+
+<div data-mainpad style="position:relative;z-index:1;padding-top:64px;color:#EDE9DF;font-family:Inter,system-ui,sans-serif;font-weight:400;overflow-x:clip">
+
+<div style="border-bottom:1px solid rgba(237,233,223,0.12)">
+  <div style="max-width:1440px;margin:0 auto;padding:14px clamp(24px,5.5vw,80px);font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.06em;color:rgba(237,233,223,0.55)">
+    <a href="TGTC Website.dc.html" style="color:rgba(237,233,223,0.7)">Home</a> / Layer 03 — Desire
+  </div>
+</div>
+
+<!-- 01 CHAPTER OPENER -->
+<section id="top" style="min-height:70vh;display:flex;flex-direction:column;justify-content:center;padding:clamp(80px,10vw,128px) 0;scroll-margin-top:64px">
+  <div style="max-width:1440px;margin:0 auto;width:100%;padding:0 clamp(24px,5.5vw,80px)">
+    <p data-k1 style="margin:0 0 48px;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.06em;color:rgba(237,233,223,0.55)">Layer 03 — Desire</p>
+    <h1 data-k1 style="margin:0;font-family:'Instrument Serif',serif;font-weight:400;font-size:clamp(48px,7vw,92px);line-height:1.05;letter-spacing:-0.02em;max-width:18em">Beauty is not a strategy. Every country is beautiful.</h1>
+    <p data-k2 style="margin:48px 0 0;font-size:18px;line-height:1.65;max-width:60ch;color:rgba(237,233,223,0.72)">Positioning is the decision about what a destination means, to whom, and against which alternatives. Most destinations have never made that decision — they have only described themselves.</p>
+  </div>
+</section>
+
+<!-- 02 THE ARGUMENT -->
+<section data-parch style="background:#EDE9DF;color:#0D0E0C;padding:clamp(96px,12vw,160px) 0;border-top:1px solid rgba(13,14,12,0.14)">
+  <div style="max-width:1440px;margin:0 auto;padding:0 clamp(24px,5.5vw,80px)">
+    <p style="margin:0 0 48px;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.06em;color:rgba(13,14,12,0.62)">02 — The sameness map</p>
+    <div data-arg>
+      <div data-matrix style="display:grid;grid-template-columns:minmax(104px,1.5fr) repeat(6,minmax(0,1fr));border-top:1px solid rgba(13,14,12,0.28);border-left:1px solid rgba(13,14,12,0.14)">
+        <span style="border-right:1px solid rgba(13,14,12,0.14);border-bottom:1px solid rgba(13,14,12,0.28)"></span>
+        <sc-for list="{{ claims }}" as="c" hint-placeholder-count="6">
+          <span style="padding:12px 10px;border-right:1px solid rgba(13,14,12,0.14);border-bottom:1px solid rgba(13,14,12,0.28);font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.06em;color:rgba(13,14,12,0.7);line-height:1.4;align-self:end">{{ c }}</span>
+        </sc-for>
+        <sc-for list="{{ matrix }}" as="r" hint-placeholder-count="12">
+          <span style="padding:0 10px;height:46px;display:flex;align-items:center;border-right:1px solid rgba(13,14,12,0.14);border-bottom:1px solid rgba(13,14,12,0.14);font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.06em;color:rgba(13,14,12,0.75)">{{ r.name }}</span>
+          <sc-for list="{{ r.cells }}" as="c" hint-placeholder-count="6">
+            <span style="height:46px;display:flex;align-items:center;justify-content:center;border-right:1px solid rgba(13,14,12,0.14);border-bottom:1px solid rgba(13,14,12,0.14)">
+              <span style="width:11px;height:11px;display:block;background:{{ c.bg }};border:{{ c.border }};opacity:{{ c.o }};transition:opacity 400ms linear;transition-delay:{{ c.d }}"></span>
+            </span>
+          </sc-for>
+        </sc-for>
+      </div>
+      <p style="margin:14px 0 0;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.06em;color:rgba(13,14,12,0.62)">Claims taken verbatim from current national tourism communications. Destinations anonymised.</p>
+    </div>
+    <div data-split style="display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:64px;margin-top:56px;align-items:start">
+      <p style="margin:0;font-family:'Instrument Serif',serif;font-size:clamp(30px,3.6vw,52px);line-height:1.05;letter-spacing:-0.02em">Six claims. Two hundred destinations. No position.</p>
+      <p style="margin:0;font-size:17px;line-height:1.65;color:rgba(13,14,12,0.7);max-width:48ch">A claim every competitor also makes is not a claim. The empty cells are the only defensible ground on the grid, and they are empty because nobody has decided to hold them.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 03 FOUR FAILURES -->
+<section style="padding:clamp(96px,12vw,160px) 0;border-top:1px solid rgba(237,233,223,0.12)">
+  <div style="max-width:1440px;margin:0 auto;padding:0 clamp(24px,5.5vw,80px)">
+    <p style="margin:0 0 64px;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.06em;color:rgba(237,233,223,0.5)">03 — Four positioning failures</p>
+    <sc-for list="{{ failures }}" as="f" hint-placeholder-count="4">
+      <div data-reveal data-split style="display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:64px;padding:44px 0;border-top:1px solid rgba(237,233,223,0.12);align-items:start">
+        <div>
+          <p style="margin:0 0 16px;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.06em;color:rgba(237,233,223,0.55);font-variant-numeric:tabular-nums">{{ f.num }}</p>
+          <h3 style="margin:0;font-family:'Instrument Serif',serif;font-weight:400;font-size:clamp(28px,3.2vw,44px);line-height:1.08;letter-spacing:-0.02em">{{ f.title }}</h3>
+        </div>
+        <div style="display:grid;gap:12px;font-size:17px;line-height:1.65;color:rgba(237,233,223,0.72);max-width:52ch">
+          <p style="margin:0">{{ f.l1 }}</p>
+          <p style="margin:0">{{ f.l2 }}</p>
+          <p style="margin:0;color:rgba(237,233,223,0.55)">{{ f.l3 }}</p>
+        </div>
+      </div>
+    </sc-for>
+    <div style="border-top:1px solid rgba(237,233,223,0.12)"></div>
+  </div>
+</section>
+
+<!-- 04 THE INSTRUMENT -->
+<section data-parch style="background:#EDE9DF;color:#0D0E0C;padding:clamp(96px,12vw,160px) 0;border-top:1px solid rgba(13,14,12,0.14)">
+  <div style="max-width:1440px;margin:0 auto;padding:0 clamp(24px,5.5vw,80px)">
+    <p style="margin:0 0 48px;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.06em;color:rgba(13,14,12,0.62)">04 — The instrument</p>
+    <div data-split style="display:grid;grid-template-columns:minmax(0,6fr) minmax(0,6fr);gap:64px;align-items:start">
+      <div>
+        <h2 style="margin:0;font-family:'Instrument Serif',serif;font-weight:400;font-size:clamp(30px,3.6vw,50px);line-height:1.06;letter-spacing:-0.02em;max-width:22em">Cultural magnetism counts what a place is currently doing, not what it owns.</h2>
+        <p style="margin:24px 0 0;font-size:17px;line-height:1.65;color:rgba(13,14,12,0.7);max-width:52ch">Magnetism is the largest single component of the desire score. It is counted across five inputs on a 36-month rolling window, per source market, so a positioning decision can be argued from a number rather than from taste.</p>
+        <p style="margin:24px 0 0;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.06em"><a href="Index.dc.html">Open the Grand Tour Index →</a></p>
+      </div>
+      <div style="border-top:1px solid rgba(13,14,12,0.28);padding-top:24px">
+        <div style="display:flex;justify-content:space-between;gap:16px;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.06em;color:rgba(13,14,12,0.62);font-variant-numeric:tabular-nums">
+          <span>Cultural magnetism — sample market</span><span>36-month rolling window</span>
+        </div>
+        <div style="margin-top:24px">
+          <sc-for list="{{ inputs }}" as="f" hint-placeholder-count="5">
+            <div style="display:grid;grid-template-columns:1fr auto;gap:24px;align-items:baseline;padding:14px 0;border-bottom:1px solid rgba(13,14,12,0.14);font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.06em;font-variant-numeric:tabular-nums">
+              <span>{{ f.label }}</span>
+              <span style="min-width:96px;text-align:right;color:#1F3FD8">{{ f.value }}</span>
+            </div>
+          </sc-for>
+        </div>
+        <div style="margin-top:24px;padding-top:20px;border-top:1px solid rgba(13,14,12,0.28)">
+          <p style="margin:0 0 8px;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.06em;color:#B23A2F">Excluded by design</p>
+          <p style="margin:0;font-size:15px;line-height:1.6;color:rgba(13,14,12,0.75);max-width:46ch">Heritage inventory and UNESCO inscriptions are not counted. Static supply is not magnetism: it does not move, it cannot be lost, and every competitor has it.</p>
+        </div>
+        <p style="margin:16px 0 0;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.06em;color:rgba(13,14,12,0.62);line-height:1.7">v1 sample data. Counts normalized against the sample set.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 05 WHAT WE DO -->
+<section style="padding:clamp(96px,12vw,160px) 0;border-top:1px solid rgba(237,233,223,0.12)">
+  <div style="max-width:1440px;margin:0 auto;padding:0 clamp(24px,5.5vw,80px)">
+    <p style="margin:0 0 48px;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.06em;color:rgba(237,233,223,0.5)">05 — Instruments in use</p>
+    <div style="border-top:1px solid rgba(237,233,223,0.12)">
+      <sc-for list="{{ capabilities }}" as="c" hint-placeholder-count="10">
+        <div data-cap style="display:grid;grid-template-columns:minmax(0,4fr) minmax(0,8fr);gap:48px;padding:26px 0;border-bottom:1px solid rgba(237,233,223,0.12);align-items:baseline">
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:13px;letter-spacing:0.06em;color:#EDE9DF">{{ c.label }}</span>
+          <span style="font-size:16px;line-height:1.65;color:rgba(237,233,223,0.68)">{{ c.desc }}</span>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+</section>
+
+<!-- 06 MANDATE SHAPE -->
+<section data-parch style="background:#EDE9DF;color:#0D0E0C;padding:clamp(96px,12vw,160px) 0;border-top:1px solid rgba(13,14,12,0.14)">
+  <div style="max-width:1440px;margin:0 auto;padding:0 clamp(24px,5.5vw,80px)">
+    <p style="margin:0 0 48px;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.06em;color:rgba(13,14,12,0.62)">06 — Mandate shape</p>
+    <div data-phases style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-top:1px solid rgba(13,14,12,0.28)">
+      <sc-for list="{{ phases }}" as="p" hint-placeholder-count="4">
+        <div style="padding:28px 32px 0 24px;border-left:1px solid rgba(13,14,12,0.14)">
+          <p style="margin:0 0 10px;font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:500;letter-spacing:0.06em">{{ p.name }}</p>
+          <p style="margin:0 0 20px;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.06em;color:#1F3FD8;font-variant-numeric:tabular-nums">{{ p.dur }}</p>
+          <p style="margin:0;font-size:15px;line-height:1.6;color:rgba(13,14,12,0.7)">{{ p.scope }}</p>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+</section>
+
+<!-- 07 CROSS-LINKS -->
+<section style="padding:clamp(80px,9vw,120px) 0;border-top:1px solid rgba(237,233,223,0.12)">
+  <div style="max-width:1440px;margin:0 auto;padding:0 clamp(24px,5.5vw,80px)">
+    <p style="margin:0 0 32px;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.06em;color:rgba(237,233,223,0.5)">07 — Adjacent layers</p>
+    <div style="border-top:1px solid rgba(237,233,223,0.12)">
+      <sc-for list="{{ links }}" as="l" hint-placeholder-count="3">
+        <a href="{{ l.href }}" data-cap style="display:grid;grid-template-columns:minmax(0,3fr) minmax(0,8fr) auto;gap:32px;align-items:baseline;padding:24px 0;border-bottom:1px solid rgba(237,233,223,0.12);font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.06em;color:#EDE9DF">
+          <span>{{ l.name }}</span>
+          <span style="color:rgba(237,233,223,0.6)">{{ l.rel }}</span>
+          <span style="color:#5E79E0">→</span>
+        </a>
+      </sc-for>
+    </div>
+  </div>
+</section>
+
+<nav data-prevnext aria-label="Adjacent layers" style="max-width:1440px;margin:0 auto;padding:0 clamp(24px,5.5vw,80px);grid-template-columns:1fr 1fr;border-top:1px solid rgba(237,233,223,0.12)">
+  <a href="Governance.dc.html" style="padding:24px 24px 24px 0;font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.06em;color:#EDE9DF">← 02 Governance</a>
+  <a href="Production.dc.html" style="padding:24px 0;text-align:right;border-left:1px solid rgba(237,233,223,0.12);font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.06em;color:#EDE9DF">04 Production →</a>
+</nav>
+
+<!-- 08 CONTACT -->
+<section style="padding:clamp(64px,7vw,96px) 0 64px;border-top:1px solid rgba(237,233,223,0.12)">
+  <div style="max-width:1440px;margin:0 auto;padding:0 clamp(24px,5.5vw,80px);display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.06em;color:rgba(237,233,223,0.6)">
+    <span>Desire mandates are scoped directly with the institution. <a href="TGTC Website.dc.html#public">Request a diagnostic →</a></span>
+    <span style="color:rgba(237,233,223,0.55);font-variant-numeric:tabular-nums">Rome · 41.9028° N, 12.4964° E</span>
+  </div>
+</section>
+
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;signal&quot;:{&quot;editor&quot;:&quot;color&quot;,&quot;default&quot;:&quot;#1F3FD8&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;options&quot;:[&quot;#1F3FD8&quot;,&quot;#2B4FE0&quot;,&quot;#3A55A8&quot;],&quot;section&quot;:&quot;Color&quot;},&quot;leakage&quot;:{&quot;editor&quot;:&quot;color&quot;,&quot;default&quot;:&quot;#B23A2F&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;options&quot;:[&quot;#B23A2F&quot;,&quot;#8F2F27&quot;,&quot;#C0463A&quot;],&quot;section&quot;:&quot;Color&quot;}}">
+class Component extends DCLogic {
+  state = { arg: false, menu: false, map: null };
+
+  componentDidMount() {
+    import('./world-map.js').then(m => {
+      this.setState({ map: m.buildWorldMap(React, { mode: 'silhouette', signal: this.signal, opacity: 0.1 }) });
+    }).catch(() => {});
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const arg = document.querySelector('[data-arg]');
+    if (reduce || !arg) this.setState({ arg: true });
+    else {
+      const io = new IntersectionObserver(es => es.forEach(e => {
+        if (e.isIntersecting) { this.setState({ arg: true }); io.disconnect(); }
+      }), { threshold: 0.2 });
+      io.observe(arg);
+      this._t = setTimeout(() => this.setState({ arg: true }), 4000);
+    }
+    if (!reduce) {
+      const io2 = new IntersectionObserver(es => es.forEach(e => {
+        if (e.isIntersecting) { e.target.style.opacity = 1; e.target.style.transform = 'none'; io2.unobserve(e.target); }
+      }), { threshold: 0.1 });
+      document.querySelectorAll('[data-reveal]').forEach(el => {
+        el.style.opacity = 0; el.style.transform = 'translateY(12px)';
+        el.style.transition = 'opacity 700ms cubic-bezier(0.22,1,0.36,1), transform 700ms cubic-bezier(0.22,1,0.36,1)';
+        io2.observe(el);
+      });
+    }
+  }
+  componentWillUnmount() { clearTimeout(this._t); }
+
+  get signal() { return this.props.signal || '#1F3FD8'; }
+  get leakage() { return this.props.leakage || '#B23A2F'; }
+  get signalText() { return '#5E79E0'; }
+  get leakageText() { return '#CE5A4D'; }
+
+  renderVals() {
+    const on = this.state.arg;
+    const layerNames = ['Intelligence', 'Governance', 'Desire', 'Production', 'Growth'];
+    const hrefs = ['Intelligence.dc.html', 'Governance.dc.html', 'Desire.dc.html', 'Production.dc.html', 'Growth.dc.html'];
+    const claims = ['Authentic culture', 'Unspoiled nature', 'Warm people', 'Rich history', 'World-class cuisine', 'Adventure'];
+    const empties = [[3, 4], [7, 1], [10, 5]];
+    const isEmpty = (r, c) => empties.some(e => e[0] === r && e[1] === c);
+    const inputs = [
+      ['Film and series', '41 titles'], ['Gastronomy', '18 listings'], ['Global events', '9 events'],
+      ['Cultural press', '212 features'], ['Music charts', '6 entries']
+    ];
+    return {
+      mapLayer: this.state.map,
+      nav: layerNames.map((name, i) => {
+        const active = i === 2;
+        return {
+          num: '0' + (i + 1), name, href: active ? '#top' : hrefs[i],
+          act: active ? 'on' : '',
+          color: active ? this.signalText : 'rgba(237,233,223,0.8)',
+          rail: active ? '2px solid ' + this.signal : '2px solid transparent',
+          railColor: active ? this.signalText : 'rgba(237,233,223,0.5)'
+        };
+      }),
+      menuOpen: !!this.state.menu,
+      toggleMenu: () => this.setState({ menu: !this.state.menu }),
+      claims,
+      matrix: 'ABCDEFGHIJKL'.split('').map((letter, r) => ({
+        name: 'Destination ' + letter,
+        cells: claims.map((_, c) => {
+          const gap = isEmpty(r, c);
+          return {
+            bg: gap ? 'transparent' : this.signal,
+            border: gap ? '1px solid ' + this.leakage : '0',
+            o: on ? '1' : '0',
+            d: ((r * 6 + c) * 12) + 'ms'
+          };
+        })
+      })),
+      failures: [
+        { num: '01', title: 'Description instead of position', l1: 'Listing assets is not choosing a meaning.', l2: 'An inventory of mountains, coastline and cuisine describes supply; a position states what the place is for and who it is not for.', l3: 'Description is safe, and it is what every competitor publishes.' },
+        { num: '02', title: 'Consensus branding', l1: 'Positioning approved by every stakeholder offends no one and moves no one.', l2: 'The committee removes the specific claim first, because the specific claim is the one somebody objects to.', l3: 'What survives is a place described as pleasant.' },
+        { num: '03', title: 'Logo as strategy', l1: 'A new identity system is delivered without a decision about audience or rival set.', l2: 'The mark is then asked to carry a position that was never written, and it fails within one administration.', l3: 'The design was not the problem.' },
+        { num: '04', title: 'Electoral reset', l1: 'Positioning is rebuilt every administration, so nothing compounds.', l2: 'Four years is shorter than the time it takes for an association to become common knowledge in a source market.', l3: 'Continuity is a governance instrument, not a matter of loyalty.' }
+      ],
+      inputs: inputs.map(f => ({ label: f[0], value: f[1] })),
+      capabilities: [
+        { label: 'Destination positioning', desc: 'What the place means, to whom, and against which alternatives.' },
+        { label: 'Nation and city branding', desc: 'The claim written, evidenced and made administrable across institutions.' },
+        { label: 'Audience and rival-set definition', desc: 'The source markets to be won and the destinations they are being won from.' },
+        { label: 'Brand architecture', desc: 'How regions, cities and products relate without contradicting the national position.' },
+        { label: 'Narrative and story systems', desc: 'A written register, held to in every market and every translation.' },
+        { label: 'Experience architecture', desc: 'What the visitor actually encounters, designed to prove the claim.' },
+        { label: 'Cultural collaboration strategy', desc: 'The company a place keeps, chosen as an asset decision.' },
+        { label: 'Perception and reputation management', desc: 'Standing measurement and response where perception is formed.' },
+        { label: 'Brand governance and decision rights', desc: 'Usage authority, adjudication and the process for saying no.' },
+        { label: 'Identity system development', desc: 'Systems built for ministries, carriers and trade to operate, not for a launch film.' }
+      ],
+      phases: [
+        { name: 'Diagnostic', dur: '6–10 weeks', scope: 'Rival set, current claim and consideration share, assessed against the Index.' },
+        { name: 'Positioning', dur: '3–5 months', scope: 'The claim, the audience and the architecture, decided with the institution.' },
+        { name: 'System build', dur: '4–8 months', scope: 'Identity, language and experience standards issued as an administrable system.' },
+        { name: 'Governance', dur: 'ongoing', scope: 'Decision rights, adjudication and measurement of consideration movement.' }
+      ],
+      links: [
+        { name: 'Layer 01 — Intelligence', rel: 'Names the set this position is measured against.', href: 'Intelligence.dc.html' },
+        { name: 'Layer 02 — Governance', rel: 'Grants the authority a position needs to hold.', href: 'Governance.dc.html' },
+        { name: 'Layer 04 — Production', rel: 'Produces the position at scale and on schedule.', href: 'Production.dc.html' }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>
