@@ -49,19 +49,25 @@ grep -rl 'grandtour.company' . --include='*.dc.html' --include='*.xml' --include
   | xargs sed -i '' 's|https://grandtour.company|https://NUEVO-DOMINIO|g'
 ```
 
-Queda pendiente:
+## Contacto
 
-1. **Configurar el formulario de Dispatch.** En Vercel → Settings → Environment
-   Variables:
+El contacto es **hola@grandtour.company**, enlazado como `mailto:` en la sección
+08 — Dispatch y en el pie del home. No hay formulario.
 
-   | Variable         | Valor                                            |
-   |------------------|--------------------------------------------------|
-   | `RESEND_API_KEY` | clave de [Resend](https://resend.com)             |
-   | `DISPATCH_TO`    | buzón interno que recibe las solicitudes          |
-   | `DISPATCH_FROM`  | remitente verificado en Resend                    |
+`api/dispatch.js` sigue en el repo pero **no lo llama nadie**: se conserva para
+poder restaurar el formulario sin reescribirlo. Para volver a activarlo hay que
+devolver el `<form>` a la sección 08 con un `onSubmit` que haga POST de
+`{email}` a `/api/dispatch`, y añadir en Vercel → Settings → Environment
+Variables:
 
-   Sin ellas, `api/dispatch.js` responde `503` y el botón muestra
-   `Failed — retry →`. Nunca confirma un envío que no ocurrió.
+| Variable         | Valor                                            |
+|------------------|--------------------------------------------------|
+| `RESEND_API_KEY` | clave de [Resend](https://resend.com)             |
+| `DISPATCH_TO`    | buzón interno que recibe las solicitudes          |
+| `DISPATCH_FROM`  | remitente verificado en Resend                    |
+
+Sin ellas la función responde `503` a propósito: nunca confirma un envío que no
+ocurrió. El marcado anterior está en el historial de git.
 
 ## Desarrollo local
 

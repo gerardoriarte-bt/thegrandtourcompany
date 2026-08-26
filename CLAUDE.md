@@ -94,8 +94,12 @@ headquarters declared in the footer. Reordering the array changes the drawing.
 
 ## Pending before the site is genuinely public
 
-The domain is live and every canonical points at it. What is left:
+The domain is live and every canonical points at it.
 
-- **Dispatch form.** `api/dispatch.js` needs `RESEND_API_KEY`, `DISPATCH_TO` and `DISPATCH_FROM` in
-  the Vercel project settings. Without them it returns 503 and the button shows `Failed — retry`,
-  by design — it never confirms a submission that did not happen.
+**Contact is a `mailto:` for now.** The Dispatch section offers
+`hola@grandtour.company` instead of a form; the same address is in the home footer. Nothing on the
+site posts to `api/dispatch.js` any more — the function is kept, unwired, so the form can be
+restored without rewriting it. To bring it back, re-add the `<form>` to section 08 with an
+`onSubmit` that POSTs `{email}` to `/api/dispatch`, and set `RESEND_API_KEY`, `DISPATCH_TO` and
+`DISPATCH_FROM` in the Vercel project settings (without them the function returns 503 by design —
+it never confirms a submission that did not happen). See commit history for the previous markup.
